@@ -1,3 +1,6 @@
 [submodule "com.netease.CloudMusic/shared-modules"]
 	path = com.netease.CloudMusic/shared-modules
 	url = https://github.com/flathub/shared-modules.git
+[submodule "com.alibabainc.DingTalk/shared-modules"]
+	path = com.alibabainc.DingTalk/shared-modules
+	url = https://github.com/flathub/shared-modules.git
