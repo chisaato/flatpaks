@@ -34,6 +34,8 @@ modules:
       - install -D -m0644 -t /app/share/icons/hicolor/scalable/apps/ dingtalk.svg
       - install -D -m0644 -t /app/share/applications/ dingtalk.desktop
       - install -D -m0755 -t /app/bin/ apply_extra
+      # 库放这里就好了
+      - install -D -m0755 -t /app/lib/ libk5crypto.so.3
     sources:
       # 对于需要额外下载的数据
       - type: extra-data
@@ -47,6 +49,13 @@ modules:
           - "mkdir dingtalk"
           - "ar x dingtalk.deb"
           - "tar xf data.tar.xz --directory=dingtalk"
+          # 把文件搬出来一点
+          - mv dingtalk/opt/apps/com.alibabainc.dingtalk/files/*Release*/ dingtalk-bin
+          # 然后我们来操作一些文件
+          - rm -rf dingtalk-bin/{libm.so.6,Resources/{i18n/tool/*.exe,qss/mac}}
+          # - rm -rf dingtalk-bin/libgtk-x11-2.0.so.*
+          # 清理一下
+          - rm -rf dingtalk
           - "rm -f dingtalk.deb data.tar.xz control.tar.* debian-binary"
         dest-filename: apply_extra
       - type: file
@@ -58,3 +67,6 @@ modules:
       - type: file
         # 准备一个启动文件
         path: dingtalk-launcher.sh
+      - type: file
+        # 准备一个启动文件
+        path: libk5crypto.so.3
