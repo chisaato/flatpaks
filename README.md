@@ -11,6 +11,9 @@
 
 - [x] 钉钉 com.alibabainc.DingTalk
 - [x] 网易云音乐 (1.2.1 版) com.netease.CloudMusic
-- [ ] 飞书 com.bytedance.FeiShu
+- [ ] 飞书 com.bytedance.Lark
+- [ ] 币安 com.binance.BinanceDesktop
+- [ ] Qv2Ray (2.7.0 版,做最后更新) com.qv2ray.Qv2Ray
+- [ ] Qv2Ray (3.x 但是这个看社区情况决定) com.qv2ray.Qv2Ray3
 
 还有一些 Wine/DeepinWine 打包也想放进来,但是考虑到可能会很麻烦就暂时搁置
