@@ -1,0 +1,45 @@
+app-id: com.alibabainc.DingTalk
+runtime: org.freedesktop.Platform
+runtime-version: "21.08"
+sdk: org.freedesktop.Sdk
+command: dingtalk-launcher.sh
+modules:
+  - name: dingtalk
+    # 使用简单构建
+    buildsystem: simple
+    # 此处存放构建时命令
+    # 主要是如何安装这个应用
+    # 对于非开源软件来说则是准备环境
+    build-commands:
+      - install -D -m0755 -t /app/bin/ dingtalk-launcher.sh
+      # 拷贝解压必备的 ar
+      - cp /usr/bin/ar /app/bin/
+      - mkdir -p /app/lib
+      - cp /usr/lib/x86_64-linux-gnu/libbfd* /app/lib/
+      - install -D -m0644 -t /app/share/icons/hicolor/scalable/apps/ dingtalk.svg
+      - install -D -m0644 -t /app/share/applications/ dingtalk.desktop
+      - install -D -m0755 -t /app/bin/ apply_extra
+    sources:
+      # 对于需要额外下载的数据
+      - type: extra-data
+        url: https://dtapp-pub.dingtalk.com/dingtalk-desktop/xc_dingtalk_update/linux_deb/Release/com.alibabainc.dingtalk_1.3.0.20214_amd64.deb
+        sha256: aaf510b5dc07eba5bf2e5ed48f38a8425e1128f57107d2d00a56ed71fd8c2ec8
+        filename: dingtalk.deb
+        size: 228552004
+      - type: script
+        # 这里我们写一个解压并搬文件的脚本
+        commands:
+          - "mkdir dingtalk"
+          - "ar x dingtalk.deb"
+          - "tar xf data.tar.xz --directory=dingtalk"
+          - "rm -f dingtalk.deb data.tar.xz control.tar.* debian-binary"
+        dest-filename: apply_extra
+      - type: file
+        # 准备一个图标
+        path: dingtalk.svg
+      - type: file
+        # 准备一个桌面文件
+        path: dingtalk.desktop
+      - type: file
+        # 准备一个启动文件
+        path: dingtalk-launcher.sh
