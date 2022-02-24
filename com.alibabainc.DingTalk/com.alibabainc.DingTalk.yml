@@ -9,6 +9,9 @@ finish-args:
   - --socket=pulseaudio
   - --share=network
   - --device=dri
+  - --filesystem=xdg-download
+  - --persist=.config
+  - --persist=.cache
 modules:
   - shared-modules/glu/glu-9.json
   - name: libXmu
@@ -30,12 +33,14 @@ modules:
       # 拷贝解压必备的 ar
       - cp /usr/bin/ar /app/bin/
       - mkdir -p /app/lib
-      - cp /usr/lib/x86_64-linux-gnu/libbfd* /app/lib/
-      - install -D -m0644 -t /app/share/icons/hicolor/scalable/apps/ dingtalk.svg
-      - install -D -m0644 -t /app/share/applications/ dingtalk.desktop
-      - install -D -m0755 -t /app/bin/ apply_extra
       # 库放这里就好了
       - install -D -m0755 -t /app/lib/ libk5crypto.so.3
+      - cp /usr/lib/x86_64-linux-gnu/libbfd* /app/lib/
+      - install -D -m0644 -t /app/share/icons/hicolor/scalable/apps/ com.alibabainc.DingTalk.svg
+      - install -D -m0644 -t /app/share/applications/ com.alibabainc.DingTalk.desktop
+      - install -D -m0644 -t /app/share/metainfo/ com.alibabainc.DingTalk.xml
+      - install -D -m0755 -t /app/bin/ apply_extra
+
     sources:
       # 对于需要额外下载的数据
       - type: extra-data
@@ -58,15 +63,14 @@ modules:
           - rm -rf dingtalk
           - "rm -f dingtalk.deb data.tar.xz control.tar.* debian-binary"
         dest-filename: apply_extra
+      # 其他资源准备
       - type: file
-        # 准备一个图标
-        path: dingtalk.svg
+        path: com.alibabainc.DingTalk.svg
       - type: file
-        # 准备一个桌面文件
-        path: dingtalk.desktop
+        path: com.alibabainc.DingTalk.desktop
       - type: file
-        # 准备一个启动文件
+        path: com.alibabainc.DingTalk.xml
+      - type: file
         path: dingtalk-launcher.sh
       - type: file
-        # 准备一个启动文件
         path: libk5crypto.so.3
