@@ -1,0 +1,76 @@
+app-id: io.github.Icalingua.Icalingua
+runtime: org.freedesktop.Platform
+runtime-version: "21.08"
+sdk: org.freedesktop.Sdk
+base: org.electronjs.Electron2.BaseApp
+base-version: "21.08"
+separate-locales: false
+rename-icon: icalingua
+rename-desktop-file: icalingua.desktop
+command: icalingua
+finish-args:
+  - --share=ipc
+  - --socket=x11
+  - --socket=wayland
+  - --socket=pulseaudio
+  - --device=dri
+  - --share=network
+  - --persist=.pki
+  - --filesystem=xdg-documents:ro
+  - --filesystem=xdg-download
+  - --filesystem=xdg-config/fontconfig:ro
+  - --talk-name=org.freedesktop.Notifications
+  - --talk-name=org.kde.StatusNotifierWatcher
+  - --talk-name=com.canonical.AppMenu.Registrar
+
+modules:
+  - name: icalingua
+    buildsystem: simple
+    build-options:
+      no-debuginfo: true
+    build-commands:
+      - ar x icalingua.deb
+      - tar xf data.*
+      - cp -a opt/Icalingua $FLATPAK_DEST/
+      - cp -a usr/share $FLATPAK_DEST/
+      - sed -i 's:chat;:Chat;:g' $FLATPAK_DEST/share/applications/*.desktop
+      - desktop-file-edit --set-key="Exec" --set-value="icalingua %U"
+        $FLATPAK_DEST/share/applications/*.desktop
+      - install -Dm644 $FLATPAK_ID.appdata.xml -t /app/share/metainfo
+      - install -Dm755 icalingua.sh /app/bin/icalingua
+    sources:
+      - type: file
+        only-arches: [x86_64]
+        dest-filename: icalingua.deb
+        url: https://github.com/Icalingua-plus-plus/Icalingua-plus-plus/releases/download/v2.5.2/icalingua_2.5.2_amd64.snap
+        sha256: 91270a3de19e026fc9bf2aa5d5741f8c97a31ed015500a6a398fe9ca65730f6d
+        x-checker-data:
+          type: json
+          is-main-source: true
+          url: https://api.github.com/repos/Icalingua-plus-plus/Icalingua-plus-plus/releases/latest
+          version-query: .tag_name | sub("^v"; "")
+          url-query: >-
+            .assets[] | select(.name=="icalingua_" + $version + "_amd64.deb") |
+            .browser_download_url
+
+      - type: file
+        only-arches: [aarch64]
+        dest-filename: icalingua.deb
+        url: https://github.com/Icalingua-plus-plus/Icalingua-plus-plus/releases/download/v2.5.2/icalingua_2.5.2_arm64.snap
+        sha256: 27ca8ba8652d4751d44c0a5348ace0865836b760f12d24458b2c7edcf8ce4c1a
+        x-checker-data:
+          type: json
+          url: https://api.github.com/repos/Icalingua-plus-plus/Icalingua-plus-plus/releases/latest
+          version-query: .tag_name | sub("^v"; "")
+          url-query: >-
+            .assets[] | select(.name=="icalingua_" + $version + "_arm64.deb") |
+            .browser_download_url
+
+      - type: file
+        path: io.github.Icalingua.Icalingua.appdata.xml
+
+      - type: script
+        dest-filename: icalingua.sh
+        commands:
+          - export TMPDIR=$XDG_RUNTIME_DIR/app/$FLATPAK_ID
+          - zypak-wrapper.sh /app/Icalingua/icalingua "$@"
