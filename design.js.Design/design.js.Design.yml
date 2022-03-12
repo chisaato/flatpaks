@@ -5,9 +5,11 @@ sdk: org.freedesktop.Sdk
 base: org.electronjs.Electron2.BaseApp
 base-version: "21.08"
 separate-locales: false
-rename-icon: js.design
-rename-desktop-file: js.design.desktop
-command: js.design
+# 看起来这两个是在打包的时候用来自动化重命名用的
+# 如果是闭源软件或者你自己引入了,则不用写
+# rename-icon: js.design
+# rename-desktop-file: design.js.Design.desktop
+command: js.design.sh
 finish-args:
   - --share=ipc
   - --socket=x11
@@ -24,30 +26,54 @@ finish-args:
   - --talk-name=com.canonical.AppMenu.Registrar
 
 modules:
+  # 隔离环境下使用 appimage 自解压容易出问题,所以还是上工具
+  # 直接下载一个 7z 来干活
+  - name: p7zip
+    buildsystem: simple
+    build-commands:
+      - install -D -m0755 -t /app/bin/ 7z
+      - install -D -m06444 -t /app/bin/ 7z.so
+    sources:
+      - type: archive
+        url: https://github.com/jinfeihan57/p7zip/releases/download/v17.04/linux-p7zip.zip
+        sha256: 8af44dec5ddc13b8dff49058c052787d537a829f264c2904c2f91e8ed30afcb2
+
   - name: js.design
     buildsystem: simple
     build-commands:
       # 拷贝编辑工具 desktop-file-edit
       # - cp /usr/bin/desktop-file-edit /app/bin/
       - install -D -m0755 -t /app/bin/ apply_extra
+      - install -D -m0755 -t /app/bin/ js.design.sh
       # - desktop-file-edit --set-key="Exec" --set-value="icalingua %U" $FLATPAK_DEST/share/applications/*.desktop
-      - install -D -m0644 -t /app/share/icons/hicolor/scalable/apps/ design.js.Design.svg
+      - install -D -m0644 -t /app/share/icons/hicolor/scalable/apps/ design.js.Design.png
       - install -D -m0644 -t /app/share/applications/ design.js.Design.desktop
-      - install -D -m0644 -t /app/share/metainfo/ design.js.Design.xml
+      - install -D -m0644 -t /app/share/metainfo/ design.js.Design.appdata.xml
     sources:
       - type: extra-data
         filename: js.design.AppImage
         url: "https://img.js.design/assets/download/即时设计 Linux版.AppImage"
         sha256: b654fc44b270c878d0b3a18cef00a4319d08a4418a713ec58795b6e371c6e19b
+        size: 105633132
 
       - type: script
         # 这里我们写一个解压并搬文件的脚本
         commands:
-          - ./js.design.AppImage --appimage-extract
+          - mkdir js.design
+          - cd js.design
+          # - ls -la
+          # - ls -la ../
+          # - ldd /app/bin/7z
+          - /app/bin/7z x ../js.design.AppImage
+          - cd ..
           - rm js.design.AppImage
-          # 直接拷贝应该没问题?
-          - cp -a squashfs-root/* $FLATPAK_DEST/
-          # - install -Dm755 icalingua.sh /app/bin/icalingua
+          # 由于 7z 解压不保留权限,我们需要修复权限
+          - chmod +x js.design/js.design
+          - chmod +x js.design/AppRun
+          # 再考虑清理一点东西
+          - rm -rf js.design/js.design.desktop
+          - rm -rf js.design/usr
+          - rm -rf js.design/js.design.png
         dest-filename: apply_extra
 
       - type: file
@@ -56,8 +82,11 @@ modules:
       - type: file
         path: design.js.Design.desktop
 
+      - type: file
+        path: design.js.Design.png
+
       - type: script
         dest-filename: js.design.sh
         commands:
           - export TMPDIR=$XDG_RUNTIME_DIR/app/$FLATPAK_ID
-          - zypak-wrapper.sh /app/js.design/js.design "$@"
+          - zypak-wrapper.sh /app/extra/js.design/js.design "$@"
