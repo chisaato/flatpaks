@@ -12,6 +12,7 @@
 - [x] 钉钉 com.alibabainc.DingTalk
 - [x] 网易云音乐 (1.2.1 版) com.netease.CloudMusic
 - [x] Icalingua (plus-plus) io.github.Icalingua.Icalingua
+- [ ] 即时设计 design.js.Design
 - [ ] 飞书 com.bytedance.Lark
 - [ ] 币安 com.binance.BinanceDesktop
 - [ ] Qv2Ray (2.7.0 版,做最后更新) com.qv2ray.Qv2Ray

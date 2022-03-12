@@ -38,7 +38,7 @@ modules:
       - cp /usr/lib/x86_64-linux-gnu/libbfd* /app/lib/
       - install -D -m0644 -t /app/share/icons/hicolor/scalable/apps/ com.alibabainc.DingTalk.svg
       - install -D -m0644 -t /app/share/applications/ com.alibabainc.DingTalk.desktop
-      - install -D -m0644 -t /app/share/metainfo/ com.alibabainc.DingTalk.xml
+      - install -D -m0644 -t /app/share/metainfo/ com.alibabainc.DingTalk.appdata.xml
       - install -D -m0755 -t /app/bin/ apply_extra
 
     sources:
@@ -69,7 +69,7 @@ modules:
       - type: file
         path: com.alibabainc.DingTalk.desktop
       - type: file
-        path: com.alibabainc.DingTalk.xml
+        path: com.alibabainc.DingTalk.appdata.xml
       - type: file
         path: dingtalk-launcher.sh
       - type: file

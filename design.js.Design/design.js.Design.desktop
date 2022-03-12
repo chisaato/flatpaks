@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=即时设计
+Exec=js.design %U
+Terminal=false
+Type=Application
+Icon=js.design
+StartupWMClass=即时设计
+X-AppImage-Version=1.0.2
+Comment=https://js.design
+Categories=Utility;
