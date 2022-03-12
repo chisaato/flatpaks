@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop-application">
+  <id>design.js.Design</id>
+  <name>Icalingua++</name>
+  <name xml:lang="zh_CN">Icalingua++</name>
+  <summary>可云端编辑的专业级 UI 设计工具</summary>
+  <summary xml:lang="zh_CN">可云端编辑的专业级 UI 设计工具</summary>
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>LicenseRef-proprietary</project_license>
+  <url type="homepage">https://js.design/home</url>
+  <recommends>
+    <control>pointing</control>
+    <control>keyboard</control>
+    <control>touch</control>
+  </recommends>
+  <description>
+    <p></p>
+    <p xml:lang="zh_CN">
+        可云端编辑的专业级 UI 设计工具，为中国设计师量身打造
+        Windows 也能用的「协作版 Sketch」
+    </p>
+  </description>
+  <launchable type="desktop-id">design.js.Design.desktop</launchable>
+  <releases>
+    <release version="1.0.1" date="2022-03-11" />
+  </releases>
+</component>
