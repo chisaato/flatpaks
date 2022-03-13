@@ -1,0 +1,65 @@
+app-id: com.github.Qv2ray
+runtime: org.kde.Platform
+runtime-version: "5.15"
+sdk: org.kde.Sdk
+command: qv2ray
+rename-desktop-file: qv2ray.desktop
+rename-icon: qv2ray
+rename-appdata-file: qv2ray.metainfo.xml
+cleanup:
+  - "/include"
+  - "/lib/debug"
+  - "*.la"
+  - "*.a"
+  - "/lib/pkgconfig"
+finish-args:
+  - "--share=ipc"
+  - "--share=network"
+  - "--socket=x11"
+  - "--socket=wayland"
+  - "--socket=pulseaudio"
+  - "--talk-name=org.freedesktop.Notifications"
+  - "--talk-name=org.kde.StatusNotifierWatcher"
+  - "--own-name=org.kde.StatusNotifierItem-2-1"
+  - "--filesystem=xdg-run/dconf"
+  - "--filesystem=~/.config/dconf:ro"
+  - "--talk-name=ca.desrt.dconf"
+  - "--env=DCONF_USER_CONFIG_DIR=.config/dconf"
+  - "--device=dri"
+modules:
+  - name: protobuf
+    cleanup:
+      - "/bin"
+      - "/lib/libprotoc*"
+      - "/lib/libprotobuf-lite*"
+      - "/share/emacs"
+      - "/share/vim"
+    sources:
+      - type: git
+        url: https://github.com/protocolbuffers/protobuf.git
+        tag: v3.14.0
+        commit: 2514f0bd7da7e2af1bed4c5d1b84f031c4d12c10
+  - name: grpc
+    cleanup:
+      - "/bin"
+    buildsystem: cmake-ninja
+    config-opts:
+      - "-DgRPC_PROTOBUF_PROVIDER=package"
+      - "-DgRPC_ZLIB_PROVIDER=package"
+      - "-DgRPC_SSL_PROVIDER=package"
+    sources:
+      - type: git
+        url: https://github.com/grpc/grpc.git
+        tag: v1.35.0
+        commit: 257d0045ab958eb767a3591c88e9d0c2bdf4b916
+  - name: qv2ray
+    buildsystem: cmake-ninja
+    config-opts:
+      - "-DEMBED_TRANSLATIONS=ON"
+    cleanup:
+      - "/share/icons/hicolor/1024x1024"
+    sources:
+      - type: git
+        disable-shallow-clone: true
+        url: https://github.com/Qv2ray/Qv2ray.git
+        tag: v2.7.0
