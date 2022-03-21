@@ -1,0 +1,20 @@
+name: 构建 io.github.Icalingua.Icalingua
+on:
+  push:
+    paths:
+      - io.github.Icalingua.Icalingua/*
+      - .github/workflows/icalingua.yml
+jobs:
+  test-build-icalingua:
+    runs-on: ubuntu-latest
+    name: test-build-icalingua
+    steps:
+      - name: 检出代码
+        uses: actions/checkout@v2
+        with:
+          submodules: recursive
+      - name: 构建 Flatpak
+        uses: bilelmoussaoui/flatpak-github-actions/flatpak-builder@v4
+        with:
+          bundle: io.github.Icalingua.Icalingua.flatpak
+          manifest-path: io.github.Icalingua.Icalingua/io.github.Icalingua.Icalingua.yml

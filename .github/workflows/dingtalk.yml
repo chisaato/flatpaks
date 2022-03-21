@@ -1,13 +1,13 @@
+name: 构建 com.alibabainc.DingTalk
 on:
   push:
-name: 测试构建 com.alibabainc.DingTalk
+    paths:
+      - com.alibabainc.DingTalk/*
+      - .github/workflows/dingtalk.yml
 jobs:
   test-build-dingtalk:
-    name: "test-build-dingtalk"
     runs-on: ubuntu-latest
-    container:
-      image: bilelmoussaoui/flatpak-github-actions:gnome-40
-      options: --privileged
+    name: test-build-dingtalk
     steps:
       - name: 检出代码
         uses: actions/checkout@v2

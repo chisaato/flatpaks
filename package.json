@@ -1,0 +1,18 @@
+{
+  "name": "flatpaks",
+  "version": "1.0.0",
+  "main": "src/build.js",
+  "repository": "git@github.com:gzzchh/flatpaks.git",
+  "author": "gzzchh <xjdzch@126.com>",
+  "license": "MIT",
+  "dependencies": {
+    "fs-extra": "^10.0.1",
+    "klaw-sync": "^6.0.0",
+    "prettier": "^2.6.0",
+    "yaml": "^1.10.2"
+  },
+  "scripts": {
+    "build": "yarn clean && node src/build.js && prettier --write .github/",
+    "clean": "rm -f .github/workflows/*.yml"
+  }
+}

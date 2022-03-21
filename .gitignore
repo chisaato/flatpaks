@@ -1,4 +1,4 @@
 .flatpak-builder/
 .flatpak/
 flatpak_app/
-
+node_modules/

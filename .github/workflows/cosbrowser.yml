@@ -1,0 +1,20 @@
+name: 构建 com.tencent.COSBrowser
+on:
+  push:
+    paths:
+      - com.tencent.COSBrowser/*
+      - .github/workflows/cosbrowser.yml
+jobs:
+  test-build-cosbrowser:
+    runs-on: ubuntu-latest
+    name: test-build-cosbrowser
+    steps:
+      - name: 检出代码
+        uses: actions/checkout@v2
+        with:
+          submodules: recursive
+      - name: 构建 Flatpak
+        uses: bilelmoussaoui/flatpak-github-actions/flatpak-builder@v4
+        with:
+          bundle: com.tencent.COSBrowser.flatpak
+          manifest-path: com.tencent.COSBrowser/com.tencent.COSBrowser.yml

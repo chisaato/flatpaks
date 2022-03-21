@@ -1,13 +1,13 @@
-name: 构建 con.binance.Binance
+name: 构建 design.js.Design
 on:
   push:
     paths:
-      - con.binance.Binance/*
-      - .github/workflows/binance.yml
+      - design.js.Design/*
+      - .github/workflows/design.yml
 jobs:
-  test-build-binance:
+  test-build-design:
     runs-on: ubuntu-latest
-    name: test-build-binance
+    name: test-build-design
     steps:
       - name: 检出代码
         uses: actions/checkout@v2
@@ -16,5 +16,5 @@ jobs:
       - name: 构建 Flatpak
         uses: bilelmoussaoui/flatpak-github-actions/flatpak-builder@v4
         with:
-          bundle: con.binance.Binance.flatpak
-          manifest-path: con.binance.Binance/con.binance.Binance.yml
+          bundle: design.js.Design.flatpak
+          manifest-path: design.js.Design/design.js.Design.yml
