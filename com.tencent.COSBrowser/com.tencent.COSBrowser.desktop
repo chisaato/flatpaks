@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=COSBrowser
+Exec=AppRun --no-sandbox %U
+Terminal=false
+Type=Application
+Icon=com.tencent.COSBrowser
+StartupWMClass=cosbrowser
+X-AppImage-Version=2.8.3
+Comment=COSBrowser - Tencent Cloud COS Client
+Categories=Utility;

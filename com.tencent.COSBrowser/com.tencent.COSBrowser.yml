@@ -1,14 +1,10 @@
-app-id: design.js.Design
+app-id: com.tencent.COSBrowser
 runtime: org.freedesktop.Platform
 runtime-version: "21.08"
 sdk: org.freedesktop.Sdk
 base: org.electronjs.Electron2.BaseApp
 base-version: "21.08"
 separate-locales: false
-# 看起来这两个是在打包的时候用来自动化重命名用的
-# 如果是闭源软件或者你自己引入了,则不用写
-# rename-icon: js.design
-# rename-desktop-file: design.js.Design.desktop
 command: js.design.sh
 finish-args:
   - --socket=x11
@@ -35,18 +31,19 @@ modules:
         url: https://github.com/jinfeihan57/p7zip/releases/download/v17.04/linux-p7zip.zip
         sha256: 8af44dec5ddc13b8dff49058c052787d537a829f264c2904c2f91e8ed30afcb2
 
-  - name: js.design
+  - name: cosbrowser
     buildsystem: simple
     build-commands:
       - install -D -m0755 -t /app/bin/ apply_extra
       - install -D -m0755 -t /app/bin/ js.design.sh
-      - install -D -m0644 -t /app/share/icons/hicolor/scalable/apps/ design.js.Design.png
-      - install -D -m0644 -t /app/share/applications/ design.js.Design.desktop
-      - install -D -m0644 -t /app/share/metainfo/ design.js.Design.appdata.xml
+      - install -D -m0644 -t /app/share/icons/hicolor/scalable/apps/ com.tencent.COSBrowser.png
+      - install -D -m0644 -t /app/share/applications/ com.tencent.COSBrowser.desktop
+      - install -D -m0644 -t /app/share/metainfo/ com.tencent.COSBrowser.appdata.xml
     sources:
+      # 腾讯这个只有 zip
       - type: extra-data
-        filename: js.design.AppImage
-        url: "https://img.js.design/assets/download/即时设计 Linux版.AppImage"
+        filename: cosbrwser.zip
+        url: https://cos5.cloud.tencent.com/cosbrowser/cosbrowser-latest-linux.zip
         sha256: b654fc44b270c878d0b3a18cef00a4319d08a4418a713ec58795b6e371c6e19b
         size: 105633132
 
@@ -63,18 +60,17 @@ modules:
           # 再考虑清理一点东西
           - rm -rf js.design/js.design.desktop
           - rm -rf js.design/usr
-          - rm -rf js.design/AppRun
           - rm -rf js.design/js.design.png
         dest-filename: apply_extra
 
       - type: file
-        path: design.js.Design.appdata.xml
+        path: com.tencent.COSBrowser.appdata.xml
 
       - type: file
-        path: design.js.Design.desktop
+        path: com.tencent.COSBrowser.desktop
 
       - type: file
-        path: design.js.Design.png
+        path: com.tencent.COSBrowser.png
 
       - type: script
         dest-filename: js.design.sh
