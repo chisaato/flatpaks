@@ -12,6 +12,10 @@ const workflowMain = {
 const buildJob = {
 	"runs-on": "ubuntu-latest",
 	name: "test-build-cloudmusic",
+	container: {
+		image: "bilelmoussaoui/flatpak-github-actions:gnome-40",
+		options: "--privileged",
+	},
 	steps: [
 		{
 			name: "检出代码",
