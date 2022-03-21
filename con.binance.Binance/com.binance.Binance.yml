@@ -17,13 +17,9 @@ finish-args:
 
 modules:
   - name: binance
-    # 使用简单构建
     buildsystem: simple
-    # 此处存放构建时命令
-    # 主要是如何安装这个应用
-    # 对于非开源软件来说则是准备环境
     build-commands:
-      # - install -D -m0755 -t /app/bin/ binance-launcher.sh
+      - install -D -m0755 -t /app/bin/ binance-launcher.sh
       # 拷贝解压必备的 ar
       - cp /usr/bin/ar /app/bin/
       - mkdir -p /app/lib
