@@ -5,7 +5,7 @@ sdk: org.freedesktop.Sdk
 base: org.electronjs.Electron2.BaseApp
 base-version: "21.08"
 separate-locales: false
-command: js.design.sh
+command: cosbrowser.sh
 finish-args:
   - --socket=x11
   - --socket=wayland
@@ -35,32 +35,35 @@ modules:
     buildsystem: simple
     build-commands:
       - install -D -m0755 -t /app/bin/ apply_extra
-      - install -D -m0755 -t /app/bin/ js.design.sh
+      - install -D -m0755 -t /app/bin/ cosbrowser.sh
       - install -D -m0644 -t /app/share/icons/hicolor/scalable/apps/ com.tencent.COSBrowser.png
       - install -D -m0644 -t /app/share/applications/ com.tencent.COSBrowser.desktop
       - install -D -m0644 -t /app/share/metainfo/ com.tencent.COSBrowser.appdata.xml
     sources:
       # 腾讯这个只有 zip
       - type: extra-data
-        filename: cosbrwser.zip
+        filename: cosbrowser.zip
         url: https://cos5.cloud.tencent.com/cosbrowser/cosbrowser-latest-linux.zip
-        sha256: b654fc44b270c878d0b3a18cef00a4319d08a4418a713ec58795b6e371c6e19b
-        size: 105633132
+        sha256: 90d0a4d28a7f4a712158577940b771a30ce6d3ac07e97141154ab6d7d93911a8
+        size: 119380223
 
       - type: script
         # 这里我们写一个解压并搬文件的脚本
         commands:
-          - mkdir js.design
-          - cd js.design
-          - /app/bin/7z x ../js.design.AppImage
+          # 注意,这里只有 zip 还需要再操作一波
+          - unzip cosbrowser.zip
+          - mkdir cosbrowser
+          - cd cosbrowser
+          - /app/bin/7z x ../cosbrowser.AppImage
           - cd ..
-          - rm js.design.AppImage
+          - rm cosbrowser.AppImage
+          - rm cosbrowser.zip
           # 由于 7z 解压不保留权限,我们需要修复权限
-          - chmod +x js.design/js.design
+          - chmod +x cosbrowser/cosbrowser
           # 再考虑清理一点东西
-          - rm -rf js.design/js.design.desktop
-          - rm -rf js.design/usr
-          - rm -rf js.design/js.design.png
+          - rm -rf cosbrowser/cosbrowser.desktop
+          - rm -rf cosbrowser/usr
+          - rm -rf cosbrowser/cosbrowser.png
         dest-filename: apply_extra
 
       - type: file
@@ -73,7 +76,7 @@ modules:
         path: com.tencent.COSBrowser.png
 
       - type: script
-        dest-filename: js.design.sh
+        dest-filename: cosbrowser.sh
         commands:
           - export TMPDIR=$XDG_RUNTIME_DIR/app/$FLATPAK_ID
-          - zypak-wrapper.sh /app/extra/js.design/js.design "$@"
+          - zypak-wrapper.sh /app/extra/cosbrowser/cosbrowser "$@"
