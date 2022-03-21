@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=Binance
+Exec=binance %U
+Terminal=false
+Type=Application
+Icon=com.binance.Binance
+StartupWMClass=Binance
+Comment=Buy & sell Crypto in minutes, join the world’s largest crypto exchange.
+Categories=Network;

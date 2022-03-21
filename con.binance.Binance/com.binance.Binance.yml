@@ -1,0 +1,63 @@
+app-id: com.binance.Binance
+runtime: org.freedesktop.Platform
+runtime-version: "21.08"
+sdk: org.freedesktop.Sdk
+base: org.electronjs.Electron2.BaseApp
+base-version: "21.08"
+separate-locales: false
+command: binance
+finish-args:
+  - --socket=x11
+  - --socket=wayland
+  - --device=dri
+  - --share=network
+  - --talk-name=org.freedesktop.Notifications
+  - --talk-name=org.kde.StatusNotifierWatcher
+  - --talk-name=com.canonical.AppMenu.Registrar
+
+modules:
+  - name: binance
+    # 使用简单构建
+    buildsystem: simple
+    # 此处存放构建时命令
+    # 主要是如何安装这个应用
+    # 对于非开源软件来说则是准备环境
+    build-commands:
+      # - install -D -m0755 -t /app/bin/ binance-launcher.sh
+      # 拷贝解压必备的 ar
+      - cp /usr/bin/ar /app/bin/
+      - mkdir -p /app/lib
+      - install -D -m0644 -t /app/share/icons/hicolor/512x512/apps/ com.binance.Binance.png
+      - install -D -m0644 -t /app/share/applications/ com.binance.Binance.desktop
+      - install -D -m0644 -t /app/share/metainfo/ com.binance.Binance.appdata.xml
+      - install -D -m0755 -t /app/bin/ apply_extra
+
+    sources:
+      # 对于需要额外下载的数据
+      - type: extra-data
+        url: https://ftp.binance.com/electron-desktop/linux/production/binance-amd64-linux.deb
+        sha256: 613c2ecb1c9e965baacba50c1fef39e594d9b0db8de8671a75b0ddd833e214d5
+        filename: binance.deb
+        size: 95316288
+
+      - type: script
+        # 这里我们写一个解压并搬文件的脚本
+        commands:
+          - "mkdir binance-temp"
+          - "ar x binance.deb"
+          - "tar xf data.tar.xz --directory=binance-temp"
+          # 把文件搬出来一点
+          - mv binance-temp/opt/Binance binance
+          # 清理一下
+          - rm -rf binance-temp
+          - "rm -f binance.deb data.tar.xz control.tar.* debian-binary"
+        dest-filename: apply_extra
+      # 其他资源准备
+      - type: file
+        path: com.binance.Binance.png
+      - type: file
+        path: com.binance.Binance.desktop
+      - type: file
+        path: com.binance.Binance.appdata.xml
+      # - type: file
+      #   path: binance-launcher.sh

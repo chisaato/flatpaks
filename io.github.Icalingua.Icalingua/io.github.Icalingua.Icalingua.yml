@@ -7,7 +7,7 @@ base-version: "21.08"
 separate-locales: false
 rename-icon: icalingua
 rename-desktop-file: icalingua.desktop
-command: icalingua
+command: icalingua-launcher.sh
 finish-args:
   - --share=ipc
   - --socket=x11
@@ -35,10 +35,10 @@ modules:
       - cp -a opt/Icalingua++ $FLATPAK_DEST/
       - cp -a usr/share $FLATPAK_DEST/
       - sed -i 's:chat;:Chat;:g' $FLATPAK_DEST/share/applications/*.desktop
-      - desktop-file-edit --set-key="Exec" --set-value="icalingua %U"
+      - desktop-file-edit --set-key="Exec" --set-value="icalingua-launcher.sh %U"
         $FLATPAK_DEST/share/applications/*.desktop
       - install -Dm644 $FLATPAK_ID.appdata.xml -t /app/share/metainfo
-      - install -Dm755 icalingua.sh /app/bin/icalingua
+      - install -D -m0755 -t /app/bin/ icalingua-launcher.sh
     sources:
       - type: file
         only-arches: [x86_64]
@@ -71,7 +71,7 @@ modules:
         path: io.github.Icalingua.Icalingua.appdata.xml
 
       - type: script
-        dest-filename: icalingua.sh
+        dest-filename: icalingua-launcher.sh
         commands:
           - export TMPDIR=$XDG_RUNTIME_DIR/app/$FLATPAK_ID
           - zypak-wrapper.sh /app/Icalingua++/icalingua "$@"

@@ -9,7 +9,7 @@ separate-locales: false
 # 如果是闭源软件或者你自己引入了,则不用写
 # rename-icon: js.design
 # rename-desktop-file: design.js.Design.desktop
-command: js.design.sh
+command: js.design-launcher.sh
 finish-args:
   - --socket=x11
   - --socket=wayland
@@ -39,7 +39,7 @@ modules:
     buildsystem: simple
     build-commands:
       - install -D -m0755 -t /app/bin/ apply_extra
-      - install -D -m0755 -t /app/bin/ js.design.sh
+      - install -D -m0755 -t /app/bin/ js.design-launcher.sh
       - install -D -m0644 -t /app/share/icons/hicolor/scalable/apps/ design.js.Design.png
       - install -D -m0644 -t /app/share/applications/ design.js.Design.desktop
       - install -D -m0644 -t /app/share/metainfo/ design.js.Design.appdata.xml
@@ -77,7 +77,7 @@ modules:
         path: design.js.Design.png
 
       - type: script
-        dest-filename: js.design.sh
+        dest-filename: js.design-launcher.sh
         commands:
           - export TMPDIR=$XDG_RUNTIME_DIR/app/$FLATPAK_ID
           - zypak-wrapper.sh /app/extra/js.design/js.design "$@"
