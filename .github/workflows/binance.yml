@@ -11,6 +11,8 @@ jobs:
     steps:
       - name: 检出代码
         uses: actions/checkout@v2
+        with:
+          submodules: recursive
       - name: 构建 Flatpak
         uses: bilelmoussaoui/flatpak-github-actions/flatpak-builder@v4
         with:
