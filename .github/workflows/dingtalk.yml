@@ -1,0 +1,18 @@
+on:
+  push:
+name: 测试构建 com.alibabainc.DingTalk
+jobs:
+  test-build-dingtalk:
+    name: "test-build-dingtalk"
+    runs-on: ubuntu-latest
+    container:
+      image: bilelmoussaoui/flatpak-github-actions:gnome-40
+      options: --privileged
+    steps:
+      - name: 检出代码
+        uses: actions/checkout@v2
+      - name: 构建 Flatpak
+        uses: bilelmoussaoui/flatpak-github-actions/flatpak-builder@v4
+        with:
+          bundle: com.alibabainc.DingTalk.flatpak
+          manifest-path: com.alibabainc.DingTalk/com.alibabainc.DingTalk.yml
