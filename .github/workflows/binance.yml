@@ -1,8 +1,8 @@
-name: 构建 con.binance.Binance
+name: 构建 com.binance.Binance
 on:
   push:
     paths:
-      - con.binance.Binance/*
+      - com.binance.Binance/*
       - .github/workflows/binance.yml
 jobs:
   test-build-binance:
@@ -19,5 +19,5 @@ jobs:
       - name: 构建 Flatpak
         uses: bilelmoussaoui/flatpak-github-actions/flatpak-builder@v4
         with:
-          bundle: con.binance.Binance.flatpak
-          manifest-path: con.binance.Binance/con.binance.Binance.yml
+          bundle: com.binance.Binance.flatpak
+          manifest-path: com.binance.Binance/com.binance.Binance.yml

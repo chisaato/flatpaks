@@ -13,7 +13,7 @@
             "path": "design.js.Design"
         },
         {
-            "path": "con.binance.Binance"
+            "path": "com.binance.Binance"
         },
         {
             "path": "com.tencent.COSBrowser"
