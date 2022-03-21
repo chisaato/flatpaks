@@ -23,6 +23,7 @@ modules:
       # 拷贝解压必备的 ar
       - cp /usr/bin/ar /app/bin/
       - mkdir -p /app/lib
+      - cp /usr/lib/x86_64-linux-gnu/libbfd* /app/lib/
       - install -D -m0644 -t /app/share/icons/hicolor/512x512/apps/ com.binance.Binance.png
       - install -D -m0644 -t /app/share/applications/ com.binance.Binance.desktop
       - install -D -m0644 -t /app/share/metainfo/ com.binance.Binance.appdata.xml
@@ -39,14 +40,15 @@ modules:
       - type: script
         # 这里我们写一个解压并搬文件的脚本
         commands:
-          - "mkdir binance-temp"
-          - "ar x binance.deb"
-          - "tar xf data.tar.xz --directory=binance-temp"
+          - mkdir binance-temp
+          - ar x binance.deb
+          # - ls -l *
+          - tar xf data.tar.xz --directory=binance-temp
           # 把文件搬出来一点
           - mv binance-temp/opt/Binance binance
           # 清理一下
           - rm -rf binance-temp
-          - "rm -f binance.deb data.tar.xz control.tar.* debian-binary"
+          - rm -f binance.deb data.tar.xz control.tar.* debian-binary
         dest-filename: apply_extra
 
       # 其他资源准备

@@ -35,9 +35,9 @@ modules:
       # 拷贝解压必备的 ar
       - cp /usr/bin/ar /app/bin/
       - mkdir -p /app/lib
+      - cp /usr/lib/x86_64-linux-gnu/libbfd* /app/lib/
       # 库放这里就好了
       - install -D -m0755 -t /app/lib/ libk5crypto.so.3
-      - cp /usr/lib/x86_64-linux-gnu/libbfd* /app/lib/
       - install -D -m0644 -t /app/share/icons/hicolor/scalable/apps/ com.alibabainc.DingTalk.svg
       - install -D -m0644 -t /app/share/applications/ com.alibabainc.DingTalk.desktop
       - install -D -m0644 -t /app/share/metainfo/ com.alibabainc.DingTalk.appdata.xml
@@ -54,17 +54,17 @@ modules:
       - type: script
         # 这里我们写一个解压并搬文件的脚本
         commands:
-          - "mkdir dingtalk"
-          - "ar x dingtalk.deb"
-          - "tar xf data.tar.xz --directory=dingtalk"
+          - mkdir dingtalk-temp
+          - ar x dingtalk.deb
+          - tar xf data.tar.xz --directory=dingtalk-temp
           # 把文件搬出来一点
-          - mv dingtalk/opt/apps/com.alibabainc.dingtalk/files/*Release*/ dingtalk-bin
+          - mv dingtalk/opt/apps/com.alibabainc.dingtalk/files/*Release*/ dingtalk
           # 然后我们来操作一些文件
-          - rm -rf dingtalk-bin/{libm.so.6,Resources/{i18n/tool/*.exe,qss/mac}}
-          # - rm -rf dingtalk-bin/libgtk-x11-2.0.so.*
+          - rm -rf dingtalk/{libm.so.6,Resources/{i18n/tool/*.exe,qss/mac}}
+          # - rm -rf dingtalk/libgtk-x11-2.0.so.*
           # 清理一下
-          - rm -rf dingtalk
-          - "rm -f dingtalk.deb data.tar.xz control.tar.* debian-binary"
+          - rm -rf dingtalk-temp
+          - rm -f dingtalk.deb data.tar.xz control.tar.* debian-binary
         dest-filename: apply_extra
 
       - type: script
