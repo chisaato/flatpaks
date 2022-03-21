@@ -1,6 +1,6 @@
 [Desktop Entry]
 Name=COSBrowser
-Exec=AppRun --no-sandbox %U
+Exec=cosbrowser.sh %U
 Terminal=false
 Type=Application
 Icon=com.tencent.COSBrowser
