@@ -14,6 +14,7 @@ finish-args:
   - --persist=.cache
 modules:
   - shared-modules/glu/glu-9.json
+
   - name: libXmu
     sources:
       - type: archive
@@ -22,6 +23,7 @@ modules:
     cleanup:
       - /include
       - /share
+
   - name: dingtalk
     # 使用简单构建
     buildsystem: simple
@@ -48,6 +50,7 @@ modules:
         sha256: aaf510b5dc07eba5bf2e5ed48f38a8425e1128f57107d2d00a56ed71fd8c2ec8
         filename: dingtalk.deb
         size: 228552004
+
       - type: script
         # 这里我们写一个解压并搬文件的脚本
         commands:
@@ -63,6 +66,13 @@ modules:
           - rm -rf dingtalk
           - "rm -f dingtalk.deb data.tar.xz control.tar.* debian-binary"
         dest-filename: apply_extra
+
+      - type: script
+        commands:
+          - cd /app/extra/dingtalk-bin
+          - LD_LIBRARY_PATH=$(pwd):$LD_LIBRARY_PATH ./com.alibabainc.dingtalk $1
+        dest-filename: dingtalk-launcher.sh
+
       # 其他资源准备
       - type: file
         path: com.alibabainc.DingTalk.svg
@@ -70,7 +80,7 @@ modules:
         path: com.alibabainc.DingTalk.desktop
       - type: file
         path: com.alibabainc.DingTalk.appdata.xml
-      - type: file
-        path: dingtalk-launcher.sh
+      # - type: file
+      #   path: dingtalk-launcher.sh
       - type: file
         path: libk5crypto.so.3

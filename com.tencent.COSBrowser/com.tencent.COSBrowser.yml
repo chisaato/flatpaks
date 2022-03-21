@@ -5,7 +5,7 @@ sdk: org.freedesktop.Sdk
 base: org.electronjs.Electron2.BaseApp
 base-version: "21.08"
 separate-locales: false
-command: cosbrowser.sh
+command: cosbrowser-launcher.sh
 finish-args:
   - --socket=x11
   - --socket=wayland
@@ -35,7 +35,7 @@ modules:
     buildsystem: simple
     build-commands:
       - install -D -m0755 -t /app/bin/ apply_extra
-      - install -D -m0755 -t /app/bin/ cosbrowser.sh
+      - install -D -m0755 -t /app/bin/ cosbrowser-launcher.sh
       - install -D -m0644 -t /app/share/icons/hicolor/scalable/apps/ com.tencent.COSBrowser.png
       - install -D -m0644 -t /app/share/applications/ com.tencent.COSBrowser.desktop
       - install -D -m0644 -t /app/share/metainfo/ com.tencent.COSBrowser.appdata.xml
@@ -76,7 +76,7 @@ modules:
         path: com.tencent.COSBrowser.png
 
       - type: script
-        dest-filename: cosbrowser.sh
+        dest-filename: cosbrowser-launcher.sh
         commands:
           - export TMPDIR=$XDG_RUNTIME_DIR/app/$FLATPAK_ID
           - zypak-wrapper.sh /app/extra/cosbrowser/cosbrowser "$@"

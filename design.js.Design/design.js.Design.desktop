@@ -1,6 +1,6 @@
 [Desktop Entry]
 Name=即时设计
-Exec=js.design.sh %U
+Exec=js.design-launcher.sh %U
 Terminal=false
 Type=Application
 Icon=design.js.Design

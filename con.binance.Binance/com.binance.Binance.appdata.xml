@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop-application">
+  <id>com.binance.Binance</id>
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>LicenseRef-proprietary</project_license>
+  <name>Binance</name>
+  <summary>Binance</summary>
+  <description>
+    <p>
+      Buy and sell Crypto in minutes, join the world’s largest crypto exchange.
+    </p>
+  </description>
+  <launchable type="desktop-id">com.binance.Binance.desktop</launchable>
+  <categories>
+    <category>Network</category>
+  </categories>
+  <url type="homepage">https://www.binance.com/</url>
+  <developer_name>Binance</developer_name>
+  <releases>
+    <release type="stable" date="2019-03-12" version="1.3.0.20214" />
+  </releases>
+</component>
