@@ -1,0 +1,22 @@
+{
+    "paths": [
+        {
+            "path": "io.github.Icalingua.Icalingua"
+        },
+        {
+            "path": "com.alibabainc.DingTalk"
+        },
+        {
+            "path": "com.netease.CloudMusic"
+        },
+        {
+            "path": "design.js.Design"
+        },
+        {
+            "path": "con.binance.Binance"
+        },
+        {
+            "path": "com.tencent.COSBrowser"
+        }
+    ]
+}

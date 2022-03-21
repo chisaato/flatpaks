@@ -1,13 +1,13 @@
+name: 构建 com.netease.CloudMusic
 on:
   push:
-name: 测试构建 com.netease.CloudMusic
+    paths:
+      - com.netease.CloudMusic/*
+      - .github/workflows/cloudmusic.yml
 jobs:
   test-build-cloudmusic:
-    name: "test-build-cloudmusic"
     runs-on: ubuntu-latest
-    container:
-      image: bilelmoussaoui/flatpak-github-actions:gnome-40
-      options: --privileged
+    name: test-build-cloudmusic
     steps:
       - name: 检出代码
         uses: actions/checkout@v2
