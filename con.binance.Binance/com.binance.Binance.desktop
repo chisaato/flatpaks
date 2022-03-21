@@ -1,6 +1,6 @@
 [Desktop Entry]
 Name=Binance
-Exec=binance %U
+Exec=binance-launcher.sh %U
 Terminal=false
 Type=Application
 Icon=com.binance.Binance

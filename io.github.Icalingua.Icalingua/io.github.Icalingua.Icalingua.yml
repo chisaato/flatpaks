@@ -54,18 +54,18 @@ modules:
             .assets[] | select(.name=="icalingua_" + $version + "_amd64.deb") |
             .browser_download_url
 
-      - type: file
-        only-arches: [aarch64]
-        dest-filename: icalingua.deb
-        url: https://github.com/Icalingua-plus-plus/Icalingua-plus-plus/releases/download/v2.5.8/icalingua_2.5.8_arm64.deb
-        sha256: 8aacfeab3dbeb14f1db2a90dec7d6c69a1b31b37f8cb469c3426ac4748843e23
-        x-checker-data:
-          type: json
-          url: https://api.github.com/repos/Icalingua-plus-plus/Icalingua-plus-plus/releases/latest
-          version-query: .tag_name | sub("^v"; "")
-          url-query: >-
-            .assets[] | select(.name=="icalingua_" + $version + "_arm64.deb") |
-            .browser_download_url
+      # - type: file
+      #   only-arches: [aarch64]
+      #   dest-filename: icalingua.deb
+      #   url: https://github.com/Icalingua-plus-plus/Icalingua-plus-plus/releases/download/v2.5.8/icalingua_2.5.8_arm64.deb
+      #   sha256: 8aacfeab3dbeb14f1db2a90dec7d6c69a1b31b37f8cb469c3426ac4748843e23
+      #   x-checker-data:
+      #     type: json
+      #     url: https://api.github.com/repos/Icalingua-plus-plus/Icalingua-plus-plus/releases/latest
+      #     version-query: .tag_name | sub("^v"; "")
+      #     url-query: >-
+      #       .assets[] | select(.name=="icalingua_" + $version + "_arm64.deb") |
+      #       .browser_download_url
 
       - type: file
         path: io.github.Icalingua.Icalingua.appdata.xml
