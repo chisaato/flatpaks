@@ -9,7 +9,6 @@ command: binance-launcher.sh
 finish-args:
   - --socket=x11
   - --socket=wayland
-  - --device=dri
   - --share=network
   - --talk-name=org.freedesktop.Notifications
   - --talk-name=org.kde.StatusNotifierWatcher

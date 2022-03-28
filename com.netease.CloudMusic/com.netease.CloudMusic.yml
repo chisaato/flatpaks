@@ -12,11 +12,9 @@ finish-args:
   - "--socket=x11"
   - "--socket=pulseaudio"
   - "--share=network"
-  - "--device=dri"
   - "--filesystem=xdg-music"
   - "--persist=.config"
   - "--persist=.cache"
-  - "--persist=.pki"
   - "--own-name=org.mpris.MediaPlayer2.netease-cloud-music"
 cleanup:
   - "/include"

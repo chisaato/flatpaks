@@ -9,11 +9,9 @@ command: cosbrowser-launcher.sh
 finish-args:
   - --socket=x11
   - --socket=wayland
-  - --device=dri
   - --share=network
   - --filesystem=xdg-documents:ro
   - --filesystem=xdg-download
-  - --filesystem=xdg-config/fontconfig:ro
   - --talk-name=org.freedesktop.Notifications
   - --talk-name=org.kde.StatusNotifierWatcher
   - --talk-name=com.canonical.AppMenu.Registrar
