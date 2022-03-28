@@ -15,7 +15,7 @@
 - [x] 即时设计 design.js.Design
 - [x] COSBrowser com.tencent.COSBrowser
 - [x] 币安 com.binance.BinanceDesktop
-- [ ] 飞书 com.bytedance.Lark
+- [x] 飞书 com.bytedance.FeiShu
 - [ ] Qv2Ray (2.7.0 版,做最后更新) com.qv2ray.Qv2Ray
 - [ ] Qv2Ray (3.x 但是这个看社区情况决定) com.qv2ray.Qv2Ray3
 
