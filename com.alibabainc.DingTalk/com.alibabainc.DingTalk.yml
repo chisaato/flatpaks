@@ -71,7 +71,7 @@ modules:
       - type: script
         commands:
           - export LD_LIBRARY_PATH=/app/extra/dingtalk-bin:$LD_LIBRARY_PATH
-          - exec /app/extra/dingtalk-bin/com.alibabainc.dingtalk $1
+          - exec /app/extra/dingtalk/com.alibabainc.dingtalk $1
         dest-filename: dingtalk-launcher.sh
 
       # 其他资源准备
