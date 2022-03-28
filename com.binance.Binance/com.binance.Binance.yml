@@ -11,7 +11,7 @@ finish-args:
   - --socket=x11
   - --socket=wayland
   - --socket=fallback-x11
-  - --socket=dri
+  - --device=dri
   - --talk-name=org.freedesktop.Notifications
   - --talk-name=org.kde.StatusNotifierWatcher
   - --talk-name=com.canonical.AppMenu.Registrar
