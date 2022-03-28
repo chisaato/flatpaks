@@ -6,7 +6,9 @@ command: dingtalk-launcher.sh
 finish-args:
   - --share=ipc
   - --socket=x11
-  - --socket=pulseaudio
+  - --socket=wayland
+  - --socket=fallback-x11
+  - --socket=dri
   - --share=network
   - --filesystem=xdg-download
   - --persist=.config

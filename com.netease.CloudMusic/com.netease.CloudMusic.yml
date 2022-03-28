@@ -8,9 +8,11 @@ base-version: stable
 separate-locales: false
 command: netease-cloud-music-launcher.sh
 finish-args:
-  - "--share=ipc"
-  - "--socket=x11"
-  - "--socket=pulseaudio"
+  - --share=ipc
+  - --socket=x11
+  - --socket=wayland
+  - --socket=fallback-x11
+  - --socket=dri
   - "--share=network"
   - "--filesystem=xdg-music"
   - "--persist=.config"

@@ -11,10 +11,12 @@ separate-locales: false
 # rename-desktop-file: design.js.Design.desktop
 command: js.design-launcher.sh
 finish-args:
+  - --share=ipc
   - --socket=x11
   - --socket=wayland
-  - --share=network
-  - --filesystem=xdg-documents:ro
+  - --socket=fallback-x11
+  - --socket=dri
+  - --filesystem=xdg-documents
   - --filesystem=xdg-download
   - --talk-name=org.freedesktop.Notifications
   - --talk-name=org.kde.StatusNotifierWatcher
