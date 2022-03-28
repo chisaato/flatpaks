@@ -1,0 +1,23 @@
+name: 构建 com.bytedance.FeiShu
+on:
+  push:
+    paths:
+      - com.bytedance.FeiShu/*
+      - .github/workflows/feishu.yml
+jobs:
+  test-build-feishu:
+    runs-on: ubuntu-latest
+    name: test-build-feishu
+    container:
+      image: bilelmoussaoui/flatpak-github-actions:gnome-40
+      options: --privileged
+    steps:
+      - name: 检出代码
+        uses: actions/checkout@v2
+        with:
+          submodules: recursive
+      - name: 构建 Flatpak
+        uses: bilelmoussaoui/flatpak-github-actions/flatpak-builder@v4
+        with:
+          bundle: com.bytedance.FeiShu.flatpak
+          manifest-path: com.bytedance.FeiShu/com.bytedance.FeiShu.yml

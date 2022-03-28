@@ -17,6 +17,9 @@
         },
         {
             "path": "com.tencent.COSBrowser"
+        },
+        {
+            "path": "com.bytedance.FeiShu"
         }
     ]
 }
