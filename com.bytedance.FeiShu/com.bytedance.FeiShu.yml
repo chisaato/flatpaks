@@ -1,0 +1,67 @@
+app-id: com.bytedance.FeiShu
+runtime: org.freedesktop.Platform
+runtime-version: "21.08"
+sdk: org.freedesktop.Sdk
+command: feishu-launcher.sh
+finish-args:
+  - --share=ipc
+  - --socket=x11
+  - --socket=pulseaudio
+  - --share=network
+  - --device=dri
+  - --filesystem=xdg-download
+  - --filesystem=xdg-documents
+  - --persist=.config
+  - --persist=.cache
+modules:
+  - name: feishu
+    # 使用简单构建
+    buildsystem: simple
+    # 此处存放构建时命令
+    # 主要是如何安装这个应用
+    # 对于非开源软件来说则是准备环境
+    build-commands:
+      - install -D -m0755 -t /app/bin/ feishu-launcher.sh
+      # 拷贝解压必备的 ar
+      - cp /usr/bin/ar /app/bin/
+      - mkdir -p /app/lib
+      - cp /usr/lib/x86_64-linux-gnu/libbfd* /app/lib/
+      # 库放这里就好了
+      - install -D -m0644 -t /app/share/icons/hicolor/scalable/apps/ com.bytedance.FeiShu.png
+      - install -D -m0644 -t /app/share/applications/ com.bytedance.FeiShu.desktop
+      - install -D -m0644 -t /app/share/metainfo/ com.bytedance.FeiShu.appdata.xml
+      - install -D -m0755 -t /app/bin/ apply_extra
+
+    sources:
+      # 对于需要额外下载的数据
+      - type: extra-data
+        url: https://sf3-cn.feishucdn.com/obj/suite-public-file-cn/c031998f5be1/bytedance-feishu-beta_5.2.0-24_amd64.deb
+        sha256: 8df41a75c89802860403747721306467b267762138e2e6ef4eb339ddafb81374
+        filename: feishu.deb
+        size: 201977956
+
+      - type: script
+        # 这里我们写一个解压并搬文件的脚本
+        commands:
+          - mkdir feishu-temp
+          - ar x feishu.deb
+          - tar xf data.tar.xz --directory=feishu-temp
+          # 把文件搬出来一点
+          - mv feishu-temp/opt/bytedance/feishu feishu
+          # 清理一下
+          - rm -rf feishu-temp
+          - rm -f feishu.deb data.tar.xz control.tar.* debian-binary
+        dest-filename: apply_extra
+
+      - type: script
+        commands:
+          - exec /app/extra/feishu/feishu $1
+        dest-filename: feishu-launcher.sh
+
+      # 其他资源准备
+      - type: file
+        path: com.bytedance.FeiShu.png
+      - type: file
+        path: com.bytedance.FeiShu.desktop
+      - type: file
+        path: com.bytedance.FeiShu.appdata.xml
