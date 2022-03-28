@@ -12,9 +12,10 @@ finish-args:
   - --share=ipc
   - --socket=x11
   - --socket=wayland
-  - --socket=pulseaudio
+  - --socket=fallback-x11
+  - --socket=dri
   - --share=network
-  - --filesystem=xdg-documents:ro
+  - --filesystem=xdg-documents
   - --filesystem=xdg-download
   - --talk-name=org.freedesktop.Notifications
   - --talk-name=org.kde.StatusNotifierWatcher

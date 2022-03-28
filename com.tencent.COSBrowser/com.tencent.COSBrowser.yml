@@ -7,9 +7,11 @@ base-version: "21.08"
 separate-locales: false
 command: cosbrowser-launcher.sh
 finish-args:
+  - --share=ipc
   - --socket=x11
   - --socket=wayland
-  - --share=network
+  - --socket=fallback-x11
+  - --socket=dri
   - --filesystem=xdg-documents:ro
   - --filesystem=xdg-download
   - --talk-name=org.freedesktop.Notifications
