@@ -56,10 +56,10 @@ modules:
         commands:
           - mkdir dingtalk-temp
           - ar x dingtalk.deb
-          - tar xf data.tar.xz --directory=dingtalk-temp
+          - tar xvf data.tar.xz --directory=dingtalk-temp
           - ls -l dingtalk-temp
           # 把文件搬出来一点
-          - mv dingtalk-tmp/opt/apps/com.alibabainc.dingtalk/files/*Release*/ dingtalk
+          - mv dingtalk-temp/opt/apps/com.alibabainc.dingtalk/files/*Release*/ dingtalk
           # 然后我们来操作一些文件
           - rm -rf dingtalk/{libm.so.6,Resources/{i18n/tool/*.exe,qss/mac}}
           # - rm -rf dingtalk/libgtk-x11-2.0.so.*
