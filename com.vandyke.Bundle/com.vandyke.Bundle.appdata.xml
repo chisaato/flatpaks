@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <component type="desktop">
-  <id>com.vandyke.SecureCRT</id>
+  <id>com.vandyke.Bundle.SecureCRT</id>
   <metadata_license>CC0-1.0</metadata_license>
   <project_license>LicenseRef-proprietary</project_license>
   <name>SecureCRT</name>
@@ -10,9 +10,9 @@
   <summary>
     SecureCRT
   </summary>
-  <launchable type="desktop-id">om.vandyke.SecureCRT.desktop</launchable>
+  <launchable type="desktop-id">com.vandyke.Bundle.SecureCRT.desktop</launchable>
 </component><component type="desktop">
-  <id>com.vandyke.SecureFX</id>
+  <id>com.vandyke.Bundle.SecureFX</id>
   <metadata_license>CC0-1.0</metadata_license>
   <project_license>LicenseRef-proprietary</project_license>
   <name>SecureFX</name>
@@ -20,5 +20,5 @@
     <p>SecureFX provides file transfer using SFTP, FTPSSL and FTP.</p>
   </description>
   <summary>SecureFX</summary>
-  <launchable type="desktop-id">com.vandyke.SecureFX.desktop</launchable>
+  <launchable type="desktop-id">com.vandyke.Bundle.SecureFX.desktop</launchable>
 </component>

@@ -5,6 +5,5 @@ Terminal=false
 Type=Application
 Icon=design.js.Design
 StartupWMClass=即时设计
-X-AppImage-Version=1.0.2
 Comment=https://js.design
 Categories=Utility;
