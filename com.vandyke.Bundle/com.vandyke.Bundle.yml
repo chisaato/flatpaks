@@ -2,12 +2,14 @@ app-id: com.vandyke.Bundle
 runtime: org.kde.Platform
 runtime-version: '5.15-21.08'
 sdk: org.kde.Sdk
-command: sh
+command: SecureCRT
 finish-args:
   - --share=ipc
   - --socket=x11
   - --socket=wayland
   - --device=dri
+  - --filesystem=xdg-download
+  - --persist=.vandyke
 modules:
     - name: libicu
       buildsystem: simple
@@ -31,10 +33,20 @@ modules:
       buildsystem: simple
       build-commands:
         # 先解压
+        - mkdir bundle
+        - tar xvzf scrt-sfx-9.2.0.tar.gz --strip-components=1 -C bundle
+        # 破解
+        - bash patch.sh bundle
+        # 安装 bin
+        - install -D -m0755 -t /app/bin/ bundle/SecureCRT
+        - install -D -m0755 -t /app/bin/ bundle/SecureFX
+        - install -D -m0755 -t /app/bin/ bundle/sfxcl
+        # 安装 lib
+        - install -D -m0755 -t /app/lib/ bundle/libClientConfigUiQt.so
+        - install -D -m0755 -t /app/lib/ bundle/libCommonUiQt.so
+        # 删了 qt 库
+        - rm -rf libQt*
         - ls
-        - tar xvzf --strip-component=1 bin/scrt-sfx-9.2.0.tar.gz
-        - install -D -m0755 -t /app/bin/ SecureCRT
-        - install -D -m0755 -t /app/bin/ SecureFX
         - install -D -m0755 -t /app/share/icons/hicolor/scalable/apps/ com.vandyke.SecureCRT.png
         - install -D -m0755 -t /app/share/icons/hicolor/scalable/apps/ com.vandyke.SecureFX.png
         - install -D -m0755 -t /app/share/applications/ com.vandyke.SecureCRT.desktop
@@ -56,6 +68,7 @@ modules:
         # Patch
         - type: file
           path: scrt-sfx-patch-920.sh
+          dest-filename: patch.sh
         # 本体
         - type: file
           path: bin/scrt-sfx-9.2.0.tar.gz
