@@ -1,17 +1,18 @@
 #!/bin/sh
 # set -x
+SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 cd $1
 cat SecureCRT  | od -A n -v -t x1 | tr -d ' \n' > SecureCRTHEX.txt
 mv SecureCRT SecureCRT_backup
 # XForce 注册机 Bundle 模式
 sed -i 's/32c799554a2483ab311bac3af12900dd55b78ca50bedfed324120f42b5/05f51f74d5081b8fa2915dc90a3300969f71cd8fb36d0f0c6fd0b54d46/g' SecureCRTHEX.txt
-cat SecureCRTHEX.txt | flatpak-spawn --host xxd -r -p > SecureCRT
+cat SecureCRTHEX.txt | ${SCRIPT_DIR}/busybox xxd -r -p > SecureCRT
 
 cat SecureFX  | od -A n -v -t x1 | tr -d ' \n' > SecureFXHEX.txt
 mv SecureFX SecureFX_backup
 # XForce 注册机 Bundle 模式
 sed -i 's/32c799554a2483ab311bac3af12900dd55b78ca50bedfed324120f42b5/05f51f74d5081b8fa2915dc90a3300969f71cd8fb36d0f0c6fd0b54d46/g' SecureFXHEX.txt
-cat SecureFXHEX.txt  | flatpak-spawn --host xxd -r -p > SecureFX
+cat SecureFXHEX.txt  | ${SCRIPT_DIR}/busybox xxd -r -p > SecureFX
 
 rm SecureCRTHEX.txt SecureFXHEX.txt
 

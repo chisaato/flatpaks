@@ -2,7 +2,7 @@
 Name=SecureCRT
 Comment=SecureCRT provides remote access using SSH2, SSH1, Telnet, Serial, and other protocols.
 Exec=SecureCRT
-Icon=com.vandyke.SecureCRT
+Icon=com.vandyke.Bundle.SecureCRT
 StartupNotify=true
 Terminal=false
 Type=Application
