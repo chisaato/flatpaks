@@ -1,15 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <component type="desktop">
-  <id>com.vandyke.SecureCRT.desktop</id>
+  <id>com.vandyke.SecureCRT</id>
   <metadata_license>CC0-1.0</metadata_license>
   <project_license>LicenseRef-proprietary</project_license>
   <name>SecureCRT</name>
-  <summary>SecureCRT provides remote access using SSH2, SSH1, Telnet, Serial, and other protocols.</summary>
-</component>
-<component type="desktop">
-  <id>com.vandyke.SecureFX.desktop</id>
+  <description>
+    <p>SecureCRT provides remote access using SSH2, SSH1, Telnet, Serial, and other protocols.</p>
+  </description>
+  <summary>
+    SecureCRT
+  </summary>
+  <launchable type="desktop-id">om.vandyke.SecureCRT.desktop</launchable>
+</component><component type="desktop">
+  <id>com.vandyke.SecureFX</id>
   <metadata_license>CC0-1.0</metadata_license>
   <project_license>LicenseRef-proprietary</project_license>
   <name>SecureFX</name>
-  <summary>SecureFX provides file transfer using SFTP, FTPSSL and FTP.</summary>
+  <description>
+    <p>SecureFX provides file transfer using SFTP, FTPSSL and FTP.</p>
+  </description>
+  <summary>SecureFX</summary>
+  <launchable type="desktop-id">com.vandyke.SecureFX.desktop</launchable>
 </component>
