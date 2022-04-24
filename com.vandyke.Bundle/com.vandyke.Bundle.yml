@@ -1,0 +1,61 @@
+app-id: com.vandyke.Bundle
+runtime: org.kde.Platform
+runtime-version: '5.15-21.08'
+sdk: org.kde.Sdk
+command: sh
+finish-args:
+  - --share=ipc
+  - --socket=x11
+  - --socket=wayland
+  - --device=dri
+modules:
+    - name: libicu
+      buildsystem: simple
+      build-commands:
+        - install -D -m0755 -t /app/lib/ icu/usr/local/lib/libicudata.so.66.1
+        # - install -D -m0755 -t /app/lib/ icu/usr/local/lib/libicudata.so.66
+        # - install -D -m0755 -t /app/lib/ icu/usr/local/lib/libicudata.so
+        - install -D -m0755 -t /app/lib/ icu/usr/local/lib/libicui18n.so.66.1
+        # - install -D -m0755 -t /app/lib/ icu/usr/local/lib/libicui18n.so.66
+        # - install -D -m0755 -t /app/lib/ icu/usr/local/lib/libicui18n.so
+        - install -D -m0755 -t /app/lib/ icu/usr/local/lib/libicuuc.so.66.1
+        # - install -D -m0755 -t /app/lib/ icu/usr/local/lib/libicuuc.so.66
+        # - install -D -m0755 -t /app/lib/ icu/usr/local/lib/libicuuc.so
+        - rm -rf icu
+      sources:
+        - type: archive
+          url: https://github.com/unicode-org/icu/releases/download/release-66-1/icu4c-66_1-Fedora31-x64.tgz
+          sha256: a7a4afbfc1372ade65d62223edfb765c835076d537db0345cda27eba9c66ed6d
+
+    - name: bundle
+      buildsystem: simple
+      build-commands:
+        # 先解压
+        - ls
+        - tar xvzf --strip-component=1 bin/scrt-sfx-9.2.0.tar.gz
+        - install -D -m0755 -t /app/bin/ SecureCRT
+        - install -D -m0755 -t /app/bin/ SecureFX
+        - install -D -m0755 -t /app/share/icons/hicolor/scalable/apps/ com.vandyke.SecureCRT.png
+        - install -D -m0755 -t /app/share/icons/hicolor/scalable/apps/ com.vandyke.SecureFX.png
+        - install -D -m0755 -t /app/share/applications/ com.vandyke.SecureCRT.desktop
+        - install -D -m0755 -t /app/share/applications/ com.vandyke.SecureFX.desktop
+        - install -D -m0755 -t /app/share/metainfo/ com.vandyke.Bundle.appdata.xml
+      sources:
+        # 其他素材
+        - type: file
+          path: com.vandyke.Bundle.appdata.xml
+        - type: file
+          path: com.vandyke.SecureCRT.desktop
+        - type: file
+          path: com.vandyke.SecureFX.desktop
+        - type: file
+          path: com.vandyke.SecureCRT.png
+        - type: file
+          path: com.vandyke.SecureFX.png
+
+        # Patch
+        - type: file
+          path: scrt-sfx-patch-920.sh
+        # 本体
+        - type: file
+          path: bin/scrt-sfx-9.2.0.tar.gz
