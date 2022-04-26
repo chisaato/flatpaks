@@ -8,11 +8,12 @@ finish-args:
   - --socket=x11
   - --socket=wayland
   - --socket=fallback-x11
+  - --socket=pulseaudio
   - --device=dri
   - --share=network
   - --filesystem=xdg-download
-  - --persist=.config
-  - --persist=.cache
+  # - --persist=.config
+  # - --persist=.cache
 modules:
   - shared-modules/glu/glu-9.json
 

@@ -18,8 +18,6 @@ finish-args:
   - --talk-name=org.freedesktop.FileManager1
   - --talk-name=org.freedesktop.Notifications
   - --talk-name=org.kde.StatusNotifierWatcher
-  - --persist=.config
-  - --persist=.cache
 modules:
   - name: feishu
     # 使用简单构建
