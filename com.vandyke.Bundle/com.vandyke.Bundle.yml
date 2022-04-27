@@ -13,6 +13,7 @@ finish-args:
   - --filesystem=xdg-download
   - --talk-name=org.freedesktop.FileManager1
   - --talk-name=org.freedesktop.Notifications
+  - --talk-name=org.freedesktop.Flatpak
   # 开放字体
   - --filesystem=~/.fonts:ro
   # 需要持久化的

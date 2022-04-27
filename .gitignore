@@ -2,3 +2,4 @@
 .flatpak/
 flatpak_app/
 node_modules/
+yarn-error.log

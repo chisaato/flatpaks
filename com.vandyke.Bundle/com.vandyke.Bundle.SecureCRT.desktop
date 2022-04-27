@@ -4,6 +4,7 @@ Comment=SecureCRT provides remote access using SSH2, SSH1, Telnet, Serial, and o
 Exec=SecureCRT
 Icon=com.vandyke.Bundle.SecureCRT
 StartupNotify=true
+StartupWMClass=SecureCRT
 Terminal=false
 Type=Application
 Categories=Network;
