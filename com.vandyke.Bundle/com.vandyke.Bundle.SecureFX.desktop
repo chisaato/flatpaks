@@ -4,6 +4,7 @@ Comment=SecureFX provides file transfer using SFTP, FTPSSL and FTP.
 Exec=SecureFX
 Icon=com.vandyke.Bundle.SecureFX
 StartupNotify=true
+StartupWMClass=SecureFX
 Terminal=false
 Type=Application
 Categories=Network;
