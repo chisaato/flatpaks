@@ -42,7 +42,7 @@ modules:
       build-commands:
         # 先解压
         - mkdir bundle
-        - tar xvzf scrt-sfx-9.2.0.tar.gz --strip-components=1 -C bundle
+        - tar xvzf bundle.tar.gz --strip-components=1 -C bundle
         - chmod +x busybox
         # 破解
         - bash patch.sh bundle
@@ -87,4 +87,4 @@ modules:
 
         # 本体
         - type: file
-          path: bin/scrt-sfx-9.2.0.tar.gz
+          path: bin/bundle.tar.gz
