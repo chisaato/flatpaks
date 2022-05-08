@@ -48,10 +48,10 @@ modules:
     sources:
       # 对于需要额外下载的数据
       - type: extra-data
-        url: https://dtapp-pub.dingtalk.com/dingtalk-desktop/xc_dingtalk_update/linux_deb/Release/com.alibabainc.dingtalk_1.3.0.20214_amd64.deb
-        sha256: aaf510b5dc07eba5bf2e5ed48f38a8425e1128f57107d2d00a56ed71fd8c2ec8
+        url: https://dtapp-pub.dingtalk.com/dingtalk-desktop/xc_dingtalk_update/linux_deb/Release/com.alibabainc.dingtalk_1.4.0.20425_amd64.deb
+        sha256: 50a905bae14afc07be5c859b3d862cab04bf14e25f3aa9bd7b58b5f0907c51f0
         filename: dingtalk.deb
-        size: 228552004
+        size: 233918888
 
       - type: script
         # 这里我们写一个解压并搬文件的脚本
