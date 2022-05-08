@@ -16,6 +16,7 @@ finish-args:
   - --socket=wayland
   - --socket=fallback-x11
   - --device=dri
+  - --share=network
   - --filesystem=xdg-documents
   - --filesystem=xdg-download
   - --talk-name=org.freedesktop.Notifications
