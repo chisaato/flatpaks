@@ -48,8 +48,8 @@ modules:
       - type: extra-data
         filename: js.design.AppImage
         url: "https://img.js.design/assets/download/即时设计 Linux版.AppImage"
-        sha256: b654fc44b270c878d0b3a18cef00a4319d08a4418a713ec58795b6e371c6e19b
-        size: 105633132
+        sha256: e31bdfa42e3ea597d90e80e2781666bd927f057b4101ef0a4bbe45c4c1faa5b3
+        size: 91260816
 
       - type: script
         # 这里我们写一个解压并搬文件的脚本
