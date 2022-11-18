@@ -1,9 +1,9 @@
 app-id: com.tencent.COSBrowser
 runtime: org.freedesktop.Platform
-runtime-version: "21.08"
+runtime-version: "22.08"
 sdk: org.freedesktop.Sdk
 base: org.electronjs.Electron2.BaseApp
-base-version: "21.08"
+base-version: "22.08"
 separate-locales: false
 command: cosbrowser-launcher.sh
 finish-args:
@@ -79,4 +79,4 @@ modules:
         dest-filename: cosbrowser-launcher.sh
         commands:
           - export TMPDIR=$XDG_RUNTIME_DIR/app/$FLATPAK_ID
-          - zypak-wrapper.sh /app/extra/cosbrowser/cosbrowser "$@"
+          - zypak-wrapper.sh /app/extra/cosbrowser/cosbrowser --no-sandbox "$@"
