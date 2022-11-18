@@ -72,4 +72,4 @@ modules:
         dest-filename: icalingua-launcher.sh
         commands:
           - export TMPDIR=$XDG_RUNTIME_DIR/app/$FLATPAK_ID
-          - zypak-wrapper.sh /app/Icalingua++/icalingua "$@"
+          - zypak-wrapper.sh /app/Icalingua++/icalingua --no-sandbox "$@"
