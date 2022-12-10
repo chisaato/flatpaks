@@ -1,0 +1,1 @@
+zypak-wrapper.sh /app/extra/feishu/vulcan/vulcan-original "$@"

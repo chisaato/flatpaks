@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop-application">
+  <id>com.tencent.WeiXin</id>
+  <name>微信</name>
+  <summary>WeiXin</summary>
+  <summary xml:lang="zh_CN">微信原生版本</summary>
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>LicenseRef-proprietary</project_license>
+  <url type="homepage">https://github.com/tencentyun/cosbrowser</url>
+  <recommends>
+  </recommends>
+  <description>
+    <p>微信</p>
+    <p xml:lang="zh_CN">微信</p>
+  </description>
+  <launchable type="desktop-id">com.tencent.WeiXin.desktop</launchable>
+  <releases>
+    <release version="2.8.3" date="2022-03-11" />
+  </releases>
+</component>
