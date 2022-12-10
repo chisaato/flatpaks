@@ -1,0 +1,71 @@
+app-id: com.tencent.WeiXin
+runtime: org.freedesktop.Platform
+runtime-version: "22.08"
+sdk: org.freedesktop.Sdk
+base: org.electronjs.Electron2.BaseApp
+base-version: "22.08"
+separate-locales: false
+command: weixin-launcher.sh
+finish-args:
+  - --share=ipc
+  - --socket=x11
+  - --socket=wayland
+  - --socket=fallback-x11
+  - --device=dri
+  - --filesystem=xdg-download
+  - --talk-name=org.freedesktop.Notifications
+
+modules:
+  - name: weixin
+    buildsystem: simple
+    build-commands:
+      # 启动脚本
+      - install -D -m0755 -t /app/bin/ weixin-launcher.sh
+      # 库放这里就好了
+      - install -D -m0644 -t /app/share/applications/ $FLATPAK_ID.desktop
+      - install -D -m0644 -t /app/share/metainfo/ $FLATPAK_ID.appdata.xml
+      # 安装微信
+      - mkdir weixin-temp
+      - ar x weixin.deb
+      - tar xvf data.tar.xz --directory=weixin-temp
+      # 主要文件 $FLATPAK_DEST 就是 /app
+      - mkdir -p $FLATPAK_DEST/weixin
+      - cp -a weixin-temp/opt/apps/com.tencent.weixin/* $FLATPAK_DEST/weixin
+      # 其他资源
+      - cp -a weixin-temp/usr/share $FLATPAK_DEST/
+      # 但是要删除掉 desktop
+      - rm $FLATPAK_DEST/share/applications/weixin.desktop
+      # 还要把验证库搬过来
+      - mkdir -p $FLATPAK_DEST/lib/license
+      - install -D -m0644 -t $FLATPAK_DEST/lib/license/ weixin-temp/usr/lib/license/libuosdevicea.so
+      # 清理一下
+      - rm -rf weixin-temp
+      # - rm -f weixin.deb data.tar.xz control.tar.* debian-binary
+      # 解压过检测的库
+      - tar xvzf license.tar.gz
+      - cp -R license/etc/* /etc/
+      - cp -R license/var/* /var/
+    sources:
+      - type: file
+        only-arches: [x86_64]
+        dest-filename: weixin.deb
+        url: https://home-store-packages.uniontech.com/appstore/pool/appstore/c/com.tencent.weixin/com.tencent.weixin_2.1.5_amd64.deb
+        sha256: bd537bc3ea0f5cd4cc27f835469c3f0152c8cad31723e80b89e36e75dcb22181
+
+      - type: file
+        path: com.tencent.WeiXin.appdata.xml
+
+      - type: file
+        path: com.tencent.WeiXin.desktop
+
+      - type: file
+        path: com.tencent.WeiXin.png
+      # 修补微信的 UOS 检测
+      - type: file
+        path: license.tar.gz
+
+      - type: script
+        dest-filename: weixin-launcher.sh
+        commands:
+          - export TMPDIR=$XDG_RUNTIME_DIR/app/$FLATPAK_ID
+          - zypak-wrapper.sh /app/weixin/files/weixin/weixin --no-sandbox "$@"
