@@ -16,8 +16,14 @@
 - [x] 即时设计 design.js.Design
 - [x] COSBrowser com.tencent.COSBrowser
 - [x] 飞书 com.bytedance.FeiShu
+- [x] 币安 com.binance.BinanceDesktop
+- [ ] KikoPlay com.github.kikoplay
+- [ ] Clash Verge
 
 还有一些 Wine/DeepinWine 打包也想放进来,但是考虑到可能会很麻烦就暂时搁置
+
+Clash Verge 似乎对 Linux 版就是写死了 AppImage, 事坏文化. 所以要想打包 Flatpak 可能要考虑对代码进行修改.  
+而且 Clash Verge 还打包了本人不喜欢的 Clash Permium, 还需要尝试在打包中不携带这些资源
 
 ## 弃用
 
@@ -32,10 +38,6 @@ Wine 下面运行 Windows 版已经足够好,故不再考虑万年不更新的 D
 ### Qv2Ray com.qv2ray.Qv2Ray
 
 哎,看社区啥时候复活吧
-
-### 币安 com.binance.BinanceDesktop
-
-虽然是 Electron 的较老版本,但加入任何参数都没办法修好崩溃问题. 先不做了
 
 ## 一些规范
 
