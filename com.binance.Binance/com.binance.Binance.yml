@@ -1,9 +1,9 @@
 app-id: com.binance.Binance
 runtime: org.freedesktop.Platform
-runtime-version: "21.08"
+runtime-version: "22.08"
 sdk: org.freedesktop.Sdk
 base: org.electronjs.Electron2.BaseApp
-base-version: "21.08"
+base-version: "22.08"
 separate-locales: false
 command: binance-launcher.sh
 finish-args:
@@ -35,10 +35,10 @@ modules:
     sources:
       # 对于需要额外下载的数据
       - type: extra-data
-        url: https://ftp.binance.com/electron-desktop/linux/production/binance-amd64-linux.deb
-        sha256: 613c2ecb1c9e965baacba50c1fef39e594d9b0db8de8671a75b0ddd833e214d5
+        url: https://download-1306379396.file.myqcloud.com/electron-desktop/linux/production/binance-amd64-linux.deb
+        sha256: d6704db86420faa473342c1618739a9776bef130c7a6bbe95bfb9cad9288be7c
         filename: binance.deb
-        size: 95316288
+        size: 97317712
 
       - type: script
         # 这里我们写一个解压并搬文件的脚本
