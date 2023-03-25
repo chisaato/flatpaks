@@ -44,10 +44,10 @@ modules:
     sources:
       # 对于需要额外下载的数据
       - type: extra-data
-        url: https://sf3-cn.feishucdn.com/obj/ee-appcenter/9d89b152d581/Feishu-linux_x64-5.18.11.deb
-        sha256: f772c4c9b61e3c811b984f268d12fde6168cb81b98d311faffc7e1c05eff72d3
+        url: https://sf3-cn.feishucdn.com/obj/ee-appcenter/a1d34187be81/Feishu-linux_x64-5.30.15.deb
+        sha256: 66224b9b97a3139da4cd1be393171a790c2b18d092f98630ec13ec4629d9f86c
         filename: feishu.deb
-        size: 230386372
+        size: 242808530
 
       - type: script
         # 这里我们写一个解压并搬文件的脚本
