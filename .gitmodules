@@ -4,3 +4,6 @@
 [submodule "com.alibabainc.DingTalk/shared-modules"]
 	path = com.alibabainc.DingTalk/shared-modules
 	url = https://github.com/flathub/shared-modules.git
+[submodule "com.github.kikoplay/shared-modules"]
+	path = com.github.kikoplay/shared-modules
+	url = https://github.com/flathub/shared-modules.git

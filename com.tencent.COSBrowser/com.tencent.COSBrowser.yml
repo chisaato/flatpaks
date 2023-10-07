@@ -1,9 +1,9 @@
 app-id: com.tencent.COSBrowser
 runtime: org.freedesktop.Platform
-runtime-version: "22.08"
+runtime-version: "23.08"
 sdk: org.freedesktop.Sdk
 base: org.electronjs.Electron2.BaseApp
-base-version: "22.08"
+base-version: "23.08"
 separate-locales: false
 command: cosbrowser-launcher.sh
 finish-args:
@@ -21,15 +21,20 @@ finish-args:
 modules:
   # 隔离环境下使用 appimage 自解压容易出问题,所以还是上工具
   # 直接下载一个 7z 来干活
-  - name: p7zip
+  - name: 7z
     buildsystem: simple
     build-commands:
-      - install -D -m0755 -t /app/bin/ 7z
-      - install -D -m06444 -t /app/bin/ 7z.so
+      - tar -xf 7z.tar.xz
+      # - ls
+      # - pwd
+      # - install -D -m0755 -t /app/bin/ 7zz
+      - install -D -m0755 -t /app/bin/ 7zzs
+      # - install -D -m06444 -t /app/bin/ 7z.so
     sources:
-      - type: archive
-        url: https://github.com/jinfeihan57/p7zip/releases/download/v17.04/linux-p7zip.zip
-        sha256: 8af44dec5ddc13b8dff49058c052787d537a829f264c2904c2f91e8ed30afcb2
+      - type: file
+        url: https://7-zip.org/a/7z2301-linux-x64.tar.xz
+        sha256: 23babcab045b78016e443f862363e4ab63c77d75bc715c0b3463f6134cbcf318
+        dest-filename: 7z.tar.xz
 
   - name: cosbrowser
     buildsystem: simple
@@ -54,7 +59,7 @@ modules:
           - unzip cosbrowser.zip
           - mkdir cosbrowser
           - cd cosbrowser
-          - /app/bin/7z x ../cosbrowser.AppImage
+          - /app/bin/7zzs x ../cosbrowser.AppImage
           - cd ..
           - rm cosbrowser.AppImage
           - rm cosbrowser.zip
