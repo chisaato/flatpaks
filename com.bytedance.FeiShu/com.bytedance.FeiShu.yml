@@ -1,9 +1,10 @@
 app-id: com.bytedance.FeiShu
 runtime: org.freedesktop.Platform
-runtime-version: "22.08"
+runtime-version: "23.08"
 sdk: org.freedesktop.Sdk
 base: org.electronjs.Electron2.BaseApp
-base-version: "22.08"
+base-version: "23.08"
+separate-locales: false
 command: feishu-launcher.sh
 finish-args:
   - --share=ipc
@@ -21,6 +22,22 @@ finish-args:
   - --talk-name=org.freedesktop.Notifications
   - --talk-name=org.kde.StatusNotifierWatcher
 modules:
+  # 直接下载一个 7z 来干活
+  - name: 7z
+    buildsystem: simple
+    build-commands:
+      - tar -xf 7z.tar.xz
+      # - ls
+      # - pwd
+      # - install -D -m0755 -t /app/bin/ 7zz
+      - install -D -m0755 -t /app/bin/ 7zzs
+      # - install -D -m06444 -t /app/bin/ 7z.so
+    sources:
+      - type: file
+        url: https://7-zip.org/a/7z2301-linux-x64.tar.xz
+        sha256: 23babcab045b78016e443f862363e4ab63c77d75bc715c0b3463f6134cbcf318
+        dest-filename: 7z.tar.xz
+
   - name: feishu
     # 使用简单构建
     buildsystem: simple
@@ -44,17 +61,19 @@ modules:
     sources:
       # 对于需要额外下载的数据
       - type: extra-data
-        url: https://sf3-cn.feishucdn.com/obj/ee-appcenter/a1d34187be81/Feishu-linux_x64-5.30.15.deb
-        sha256: 66224b9b97a3139da4cd1be393171a790c2b18d092f98630ec13ec4629d9f86c
+        url: https://sf3-cn.feishucdn.com/obj/ee-appcenter/fe01b99b/Feishu-linux_x64-6.9.16.deb
+        sha256: fa4a07ebf2b427c28255a346215be62e63e7fd3b7273d59c340a747fb3cb92a8
         filename: feishu.deb
-        size: 242808530
+        size: 333525520
 
       - type: script
         # 这里我们写一个解压并搬文件的脚本
         commands:
           - mkdir feishu-temp
-          - ar x feishu.deb
-          - tar xf data.tar.xz --directory=feishu-temp
+          - 7zzs x feishu.deb
+          # - ls
+          # - pwd
+          - tar xf data.tar --directory=feishu-temp
           # 把文件搬出来一点
           - mv feishu-temp/opt/bytedance/feishu feishu
           # 清理一下
