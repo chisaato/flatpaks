@@ -22,22 +22,6 @@ finish-args:
   - --talk-name=org.freedesktop.Notifications
   - --talk-name=org.kde.StatusNotifierWatcher
 modules:
-  # 直接下载一个 7z 来干活
-  - name: 7z
-    buildsystem: simple
-    build-commands:
-      - tar -xf 7z.tar.xz
-      # - ls
-      # - pwd
-      # - install -D -m0755 -t /app/bin/ 7zz
-      - install -D -m0755 -t /app/bin/ 7zzs
-      # - install -D -m06444 -t /app/bin/ 7z.so
-    sources:
-      - type: file
-        url: https://7-zip.org/a/7z2301-linux-x64.tar.xz
-        sha256: 23babcab045b78016e443f862363e4ab63c77d75bc715c0b3463f6134cbcf318
-        dest-filename: 7z.tar.xz
-
   - name: feishu
     # 使用简单构建
     buildsystem: simple
@@ -61,16 +45,16 @@ modules:
     sources:
       # 对于需要额外下载的数据
       - type: extra-data
-        url: https://sf3-cn.feishucdn.com/obj/ee-appcenter/fe01b99b/Feishu-linux_x64-6.9.16.deb
-        sha256: fa4a07ebf2b427c28255a346215be62e63e7fd3b7273d59c340a747fb3cb92a8
+        url: https://sf3-cn.feishucdn.com/obj/ee-appcenter/6085d1c4/Feishu-linux_x64-6.9.20.deb
+        sha256: 920e63fef59a0815239c5f7cde493464c27e8a7179cf972d103f7e213b889fde
         filename: feishu.deb
-        size: 333525520
+        size: 333246056
 
       - type: script
         # 这里我们写一个解压并搬文件的脚本
         commands:
           - mkdir feishu-temp
-          - 7zzs x feishu.deb
+          - bsdtar -xf feishu.deb
           # - ls
           # - pwd
           - tar xf data.tar --directory=feishu-temp

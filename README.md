@@ -31,6 +31,8 @@ Clash Verge 似乎对 Linux 版就是写死了 AppImage, 事坏文化. 所以要
 
 Wine 下面运行 Windows 版已经足够好,故不再考虑万年不更新的 Deepin 版
 
+3.0 甚至使用 Electron 效果更好了
+
 ### 钉钉 com.alibabainc.DingTalk
 
 你 TM 倒是好好做啊,隔壁飞书的 Linux 版比你上进不知道多少倍
