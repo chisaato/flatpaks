@@ -6,9 +6,9 @@
   "author": "gzzchh <xjdzch@126.com>",
   "license": "MIT",
   "dependencies": {
-    "fs-extra": "^10.0.1",
+    "fs-extra": "^10.1.0",
     "klaw-sync": "^6.0.0",
-    "prettier": "^2.6.0",
+    "prettier": "^2.8.8",
     "yaml": "^1.10.2"
   },
   "scripts": {
