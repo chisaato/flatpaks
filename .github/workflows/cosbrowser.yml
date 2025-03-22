@@ -9,15 +9,20 @@ jobs:
     runs-on: ubuntu-latest
     name: test-build-cosbrowser
     container:
-      image: bilelmoussaoui/flatpak-github-actions:gnome-40
+      image: bilelmoussaoui/flatpak-github-actions:freedesktop-24.08
       options: --privileged
     steps:
       - name: 检出代码
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
         with:
           submodules: recursive
       - name: 构建 Flatpak
-        uses: bilelmoussaoui/flatpak-github-actions/flatpak-builder@v4
+        uses: flatpak/flatpak-github-actions/flatpak-builder@v4
         with:
           bundle: com.tencent.COSBrowser.flatpak
           manifest-path: com.tencent.COSBrowser/com.tencent.COSBrowser.yml
+      - name: 上传 Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: com.tencent.COSBrowser.flatpak
+          path: com.tencent.COSBrowser.flatpak

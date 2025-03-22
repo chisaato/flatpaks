@@ -1,12 +1,6 @@
 {
     "paths": [
         {
-            "path": "design.js.Design"
-        },
-        {
-            "path": "com.binance.Binance"
-        },
-        {
             "path": "com.tencent.COSBrowser"
         }
     ]
