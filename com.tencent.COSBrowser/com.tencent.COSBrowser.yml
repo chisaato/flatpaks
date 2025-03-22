@@ -41,10 +41,14 @@ modules:
     build-commands:
       # 下载和清理
       # 注意,这里只有 zip 还需要再操作一波
+      # - ls
       - unzip cosbrowser.zip
+      # 删掉 mac 带来的目录
+      - rm -rf __MACOSX/*
+      # 稳定文件名
+      - mv cosbrowser-*.AppImage cosbrowser.AppImage
       - mkdir cosbrowser
-      - cd cosbrowser
-      - /app/bin/7zzs x ../cosbrowser.AppImage
+      - /app/bin/7zzs x cosbrowser.AppImage -ocosbrowser
       - cd ..
       - rm cosbrowser.AppImage
       - rm cosbrowser.zip
@@ -55,7 +59,7 @@ modules:
       - rm -rf cosbrowser/usr
       - rm -rf cosbrowser/cosbrowser.png
       # 然后安装到 app 目录下
-      - install -D -m0755 -t /app/cosbrowser/ cosbrowser
+      - cp -a cosbrowser $FLATPAK_DEST/
       # - install -D -m0755 -t /app/bin/ apply_extra
       - install -D -m0755 -t /app/bin/ cosbrowser-launcher.sh
       - install -D -m0644 -t /app/share/icons/hicolor/scalable/apps/ com.tencent.COSBrowser.png
@@ -65,30 +69,30 @@ modules:
       # 腾讯这个只有 zip
       # 由于 Bundle 中无法下载额外数据,只能违规分发了
       - type: file
-        filename: cosbrowser.zip
+        dest-filename: cosbrowser.zip
         only-arches: [x86_64]
         url: https://cos5.cloud.tencent.com/cosbrowser/cosbrowser-latest-linux.zip
         sha256: 390f2654dc3b78e5dd4439213631a33870cd0479208721bd3c02e79d03d3dd37
         size: 124285479
 
-      - type: script
-        # 这里我们写一个解压并搬文件的脚本
-        commands:
-          # 注意,这里只有 zip 还需要再操作一波
-          - unzip cosbrowser.zip
-          - mkdir cosbrowser
-          - cd cosbrowser
-          - /app/bin/7zzs x ../cosbrowser.AppImage
-          - cd ..
-          - rm cosbrowser.AppImage
-          - rm cosbrowser.zip
-          # 由于 7z 解压不保留权限,我们需要修复权限
-          - chmod +x cosbrowser/cosbrowser
-          # 再考虑清理一点东西
-          - rm -rf cosbrowser/cosbrowser.desktop
-          - rm -rf cosbrowser/usr
-          - rm -rf cosbrowser/cosbrowser.png
-        dest-filename: apply_extra
+      # - type: script
+      #   # 这里我们写一个解压并搬文件的脚本
+      #   commands:
+      #     # 注意,这里只有 zip 还需要再操作一波
+      #     - unzip cosbrowser.zip
+      #     - mkdir cosbrowser
+      #     - cd cosbrowser
+      #     - /app/bin/7zzs x ../cosbrowser.AppImage
+      #     - cd ..
+      #     - rm cosbrowser.AppImage
+      #     - rm cosbrowser.zip
+      #     # 由于 7z 解压不保留权限,我们需要修复权限
+      #     - chmod +x cosbrowser/cosbrowser
+      #     # 再考虑清理一点东西
+      #     - rm -rf cosbrowser/cosbrowser.desktop
+      #     - rm -rf cosbrowser/usr
+      #     - rm -rf cosbrowser/cosbrowser.png
+      #   dest-filename: apply_extra
 
       - type: file
         path: com.tencent.COSBrowser.appdata.xml
