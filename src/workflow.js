@@ -35,7 +35,7 @@ const buildJob = {
 		},
 		{
 			name: "上传 Artifact",
-			uses: "actions/upload-artifact@v3",
+			uses: "actions/upload-artifact@v4",
 			with: {
 				name: "com.netease.CloudMusic.flatpak",
 				path: "com.netease.CloudMusic.flatpak",

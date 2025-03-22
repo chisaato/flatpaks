@@ -1,9 +1,11 @@
 name: 构建 com.tencent.COSBrowser
 on:
+  workflow_dispatch: {}
   push:
     paths:
       - com.tencent.COSBrowser/*
       - .github/workflows/cosbrowser.yml
+
 jobs:
   test-build-cosbrowser:
     runs-on: ubuntu-latest

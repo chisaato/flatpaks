@@ -23,8 +23,12 @@ function buildJob(appid) {
 	// 用 . 分隔,然后去最后一个的小写
 	let appName = appid.split(".").slice(-1)[0].toLowerCase();
 	jobs.name = `test-build-${appName}`;
+	// 修改 第二步的路径
 	jobs.steps[1].with.bundle = `${appid}.flatpak`;
 	jobs.steps[1].with["manifest-path"] = `${appid}/${appid}.yml`;
+	// 修改 第三步的文件名和路径
+	jobs.steps[2].with.name = `${appid}.flatpak`;
+	jobs.steps[2].with.path = `${appid}.flatpak`;
 	return jobs;
 }
 

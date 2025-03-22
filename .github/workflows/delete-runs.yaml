@@ -4,6 +4,7 @@ on:
     - cron: "5 4 * * *"
   workflow_dispatch: {}
   push:
+
 permissions:
   actions: write
 jobs:
