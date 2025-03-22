@@ -18,14 +18,8 @@ jobs:
         with:
           submodules: recursive
       - name: 构建 Flatpak
-        uses: flatpak/flatpak-github-actions/flatpak-builder@v4
+        uses: flatpak/flatpak-github-actions/flatpak-builder@v6
         with:
           bundle: com.tencent.COSBrowser.flatpak
           manifest-path: com.tencent.COSBrowser/com.tencent.COSBrowser.yml
           cache-key: cosbrowser
-      - name: 上传 Artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: com.tencent.COSBrowser.flatpak
-          path: com.tencent.COSBrowser.flatpak
-          compression-level: 0

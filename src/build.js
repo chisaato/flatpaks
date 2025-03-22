@@ -32,7 +32,7 @@ function buildJob(appid) {
 	// Modify the step with 'uses: flathub/flatpak-github-action@v2'
 	const flatpakBuilderStep = findStepByUses(
 		jobs.steps,
-		"flatpak/flatpak-github-actions/flatpak-builder@v4"
+		"flatpak/flatpak-github-actions/flatpak-builder@v6"
 	);
 	if (flatpakBuilderStep) {
 		flatpakBuilderStep.with.bundle = `${appid}.flatpak`;
