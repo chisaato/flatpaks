@@ -1,12 +1,12 @@
 const workflowMain = {
 	name: "构建镜像",
 	on: {
+		workflow_dispatch: {},
 		push: {
 			paths: [
 				// 放置扫描目录
 			],
 		},
-		workflow_dispatch: {},
 	},
 	jobs: {},
 };
@@ -31,6 +31,7 @@ const buildJob = {
 			with: {
 				bundle: "com.netease.CloudMusic.flatpak",
 				"manifest-path": "com.netease.CloudMusic/com.netease.CloudMusic.yml",
+				"cache-key": "cloudmusic",
 			},
 		},
 		{
@@ -39,6 +40,7 @@ const buildJob = {
 			with: {
 				name: "com.netease.CloudMusic.flatpak",
 				path: "com.netease.CloudMusic.flatpak",
+				"compression-level": 0,
 			},
 		},
 	],

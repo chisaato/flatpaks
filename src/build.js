@@ -4,6 +4,9 @@ const path = require("path");
 const workflowData = require("./workflow");
 const YAML = require("yaml");
 
+const findStepByUses = (steps, uses) =>
+	steps.find((step) => step.uses === uses);
+
 function buildWorkflowMain(appid) {
 	let workflowMain = Object.assign({}, workflowData.workflowMain);
 	// 清空 jobs
@@ -23,14 +26,46 @@ function buildJob(appid) {
 	// 用 . 分隔,然后去最后一个的小写
 	let appName = appid.split(".").slice(-1)[0].toLowerCase();
 	jobs.name = `test-build-${appName}`;
-	// 修改 第二步的路径
-	jobs.steps[1].with.bundle = `${appid}.flatpak`;
-	jobs.steps[1].with["manifest-path"] = `${appid}/${appid}.yml`;
-	// 修改 第三步的文件名和路径
-	jobs.steps[2].with.name = `${appid}.flatpak`;
-	jobs.steps[2].with.path = `${appid}.flatpak`;
+	const manifestPath = `${appid}/${appid}.yml`;
+	const imageTag = getTagFromManifest(manifestPath);
+	jobs.container.image = `bilelmoussaoui/flatpak-github-actions:${imageTag}`;
+	// Modify the step with 'uses: flathub/flatpak-github-action@v2'
+	const flatpakBuilderStep = findStepByUses(
+		jobs.steps,
+		"flatpak/flatpak-github-actions/flatpak-builder@v4"
+	);
+	if (flatpakBuilderStep) {
+		flatpakBuilderStep.with.bundle = `${appid}.flatpak`;
+		flatpakBuilderStep.with["manifest-path"] = manifestPath;
+		flatpakBuilderStep.with["cache-key"] = appName;
+	}
+
+	// Modify the step with 'uses: actions/upload-artifact@v3'
+	const uploadArtifactStep = findStepByUses(
+		jobs.steps,
+		"actions/upload-artifact@v4"
+	);
+	if (uploadArtifactStep) {
+		uploadArtifactStep.with.name = `${appid}.flatpak`;
+		uploadArtifactStep.with.path = `${appid}.flatpak`;
+	}
+
 	return jobs;
 }
+
+const getTagFromManifest = (manifestPath) => {
+	// 读取并解析这个 YAML 文件
+	let manifestContent = fs.readFileSync(manifestPath, "utf8");
+	let manifest = YAML.parse(manifestContent);
+	// 用模式匹配,分析 manifest 中的 runtime 字段,拼接上版本号
+	let type = "";
+	switch (manifest.runtime) {
+		case "org.freedesktop.Platform":
+			type = "freedesktop";
+	}
+	let version = manifest["runtime-version"];
+	return `${type}-${version}`;
+};
 
 let configJsonStr = fs
 	.readFileSync(path.join(path.dirname(__filename), "config.json"))
