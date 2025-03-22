@@ -12,10 +12,8 @@
 > freedesktop 22.04 的环境已经破坏了 Electron/Chromium 老版本的 GPU 枚举过程  
 > 故基于这些技术的应用暂且加入 `--no-sandbox` 进行临时修复
 
-- [x] Icalingua (plus-plus) io.github.Icalingua.Icalingua
 - [x] 即时设计 design.js.Design
 - [x] COSBrowser com.tencent.COSBrowser
-- [x] 飞书 com.bytedance.FeiShu
 - [x] 币安 com.binance.BinanceDesktop
 - [ ] KikoPlay com.github.kikoplay
 - [ ] Clash Verge
@@ -26,6 +24,18 @@ Clash Verge 似乎对 Linux 版就是写死了 AppImage, 事坏文化. 所以要
 而且 Clash Verge 还打包了本人不喜欢的 Clash Permium, 还需要尝试在打包中不携带这些资源
 
 ## 弃用
+
+### Icalingua (plus-plus) io.github.Icalingua.Icalingua
+
+被腾讯封杀,谁登录刀谁,不在维护
+
+### KikoPlay com.github.kikoplay
+
+已经有人打包到 Flathub 了
+
+### 飞书 com.bytedance.FeiShu
+
+已经有人打包到 Flathub 了
 
 ### 网易云音乐 com.netease.CloudMusic
 

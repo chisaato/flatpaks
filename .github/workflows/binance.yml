@@ -1,0 +1,23 @@
+name: 构建 com.binance.Binance
+on:
+  push:
+    paths:
+      - com.binance.Binance/*
+      - .github/workflows/binance.yml
+jobs:
+  test-build-binance:
+    runs-on: ubuntu-latest
+    name: test-build-binance
+    container:
+      image: bilelmoussaoui/flatpak-github-actions:gnome-40
+      options: --privileged
+    steps:
+      - name: 检出代码
+        uses: actions/checkout@v2
+        with:
+          submodules: recursive
+      - name: 构建 Flatpak
+        uses: bilelmoussaoui/flatpak-github-actions/flatpak-builder@v4
+        with:
+          bundle: com.binance.Binance.flatpak
+          manifest-path: com.binance.Binance/com.binance.Binance.yml

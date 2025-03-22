@@ -1,9 +1,9 @@
 app-id: com.tencent.COSBrowser
 runtime: org.freedesktop.Platform
-runtime-version: "23.08"
+runtime-version: "24.08"
 sdk: org.freedesktop.Sdk
 base: org.electronjs.Electron2.BaseApp
-base-version: "23.08"
+base-version: "24.08"
 separate-locales: false
 command: cosbrowser-launcher.sh
 finish-args:
@@ -32,8 +32,8 @@ modules:
       # - install -D -m06444 -t /app/bin/ 7z.so
     sources:
       - type: file
-        url: https://7-zip.org/a/7z2301-linux-x64.tar.xz
-        sha256: 23babcab045b78016e443f862363e4ab63c77d75bc715c0b3463f6134cbcf318
+        url: https://7-zip.org/a/7z2409-linux-x64.tar.xz
+        sha256: 914c7e20ad5ef8e4d3cf08620ff8894b28fe11b7eb99809d6930870fbe48a281
         dest-filename: 7z.tar.xz
 
   - name: cosbrowser
@@ -49,8 +49,8 @@ modules:
       - type: extra-data
         filename: cosbrowser.zip
         url: https://cos5.cloud.tencent.com/cosbrowser/cosbrowser-latest-linux.zip
-        sha256: 90d0a4d28a7f4a712158577940b771a30ce6d3ac07e97141154ab6d7d93911a8
-        size: 119380223
+        sha256: 390f2654dc3b78e5dd4439213631a33870cd0479208721bd3c02e79d03d3dd37
+        size: 124285479
 
       - type: script
         # 这里我们写一个解压并搬文件的脚本

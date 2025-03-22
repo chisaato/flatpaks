@@ -6,10 +6,10 @@
   "author": "gzzchh <xjdzch@126.com>",
   "license": "MIT",
   "dependencies": {
-    "fs-extra": "^10.1.0",
-    "klaw-sync": "^6.0.0",
-    "prettier": "^2.8.8",
-    "yaml": "^1.10.2"
+    "fs-extra": "^11.3.0",
+    "klaw-sync": "^7.0.0",
+    "prettier": "^3.5.3",
+    "yaml": "^2.7.0"
   },
   "scripts": {
     "build": "yarn clean && node src/build.js && prettier --write .github/",

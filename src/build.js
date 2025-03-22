@@ -43,7 +43,7 @@ configJson.paths.forEach((path) => {
 	let appName = appid.split(".").slice(-1)[0].toLowerCase();
 	let workflowFileName = `.github/workflows/${appName}.yml`;
 	// 序列化
-	YAML.scalarOptions.str.fold.lineWidth = 0;
+	// YAML.scalarOptions.str.fold.lineWidth = 0;
 	let workflowYamlStr = YAML.stringify(workflowMain);
 	// 把他们写入文件
 
